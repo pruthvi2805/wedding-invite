@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Clock, ChevronRight } from "lucide-react";
+import { MapPin, Calendar, Clock, Map } from "lucide-react";
 import Image from "next/image";
 
 interface EventCardProps {
@@ -10,8 +10,6 @@ interface EventCardProps {
     time: string;
     venueName: string;
     address: string;
-    lat: number;
-    long: number;
     googleMapsUrl?: string;
     icon?: React.ReactNode;
     isReversed?: boolean;
@@ -24,120 +22,84 @@ export const EventCard = ({
     time,
     venueName,
     address,
-    lat,
-    long,
     googleMapsUrl,
     icon,
     isReversed = false,
     accentColor = "purple",
 }: EventCardProps) => {
-    const mapUrl = googleMapsUrl || `https://www.google.com/maps/search/?api=1&query=${lat},${long}`;
-
     const theme = {
         purple: {
-            primary: "text-purple",
-            bg: "bg-purple",
-            bgHover: "hover:bg-purple-dark",
-            glow: "shadow-purple/20",
-            border: "border-purple/20",
-            light: "text-purple/60"
+            primary: "text-[#4A235A]",
+            bg: "bg-[#4A235A]",
+            border: "border-[#4A235A]/10",
         },
         marigold: {
-            primary: "text-marigold",
-            bg: "bg-marigold",
-            bgHover: "hover:bg-marigold-dark",
-            glow: "shadow-marigold/20",
-            border: "border-marigold/20",
-            light: "text-marigold/60"
+            primary: "text-[#D4AF37]",
+            bg: "bg-[#D4AF37]",
+            border: "border-[#D4AF37]/10",
         }
     }[accentColor];
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`max-w-5xl mx-auto px-6 mb-12 md:mb-24 flex flex-col ${isReversed ? "md:flex-row-reverse" : "md:flex-row"
-                } gap-8 md:gap-12 items-center`}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className={`max-w-6xl mx-auto px-6 mb-24 md:mb-32 flex flex-col ${isReversed ? "md:flex-row-reverse" : "md:flex-row"} gap-12 md:gap-20 items-center`}
         >
-            {/* Arch Frame Section */}
-            <div className="relative flex-1 group w-full max-w-md">
-                {/* SVG Arch Mask / Frame */}
-                <div className="relative overflow-hidden aspect-[4/5] rounded-t-full border-[12px] border-gold/40 shadow-[0_20px_50px_rgba(0,0,0,0.2)] p-1 bg-gold/20">
+            {/* Visual Anchor */}
+            <div className="relative flex-1 group w-full max-w-sm">
+                <div className="relative aspect-[4/5] rounded-t-full border-[1px] border-gold/40 shadow-2xl p-4 bg-white/50 backdrop-blur-sm">
                     <div className="relative h-full w-full overflow-hidden rounded-t-full bg-cream-dark">
-                        {/* Recursive Marigold Pattern */}
-                        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-marigold via-transparent to-transparent bg-[length:30px_30px]" />
-
-                        <div className="absolute inset-0 flex items-center justify-center p-12">
-                            <div className={`w-full h-full ${theme.primary} transition-transform duration-1000 group-hover:scale-110 drop-shadow-xl`}>
+                        <div className="absolute inset-0 flex items-center justify-center p-8">
+                            <div className={`w-full h-full transition-transform duration-1000 group-hover:scale-105`}>
                                 {icon}
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {/* Frame Ornaments - Removed to cleaner look */}
             </div>
 
-            {/* Content Section */}
-            <div className="relative flex-1 text-center md:text-left space-y-8 py-12 px-8">
-                {/* Decorative Flourishes */}
-                <div className="absolute top-0 left-0 w-16 h-16 opacity-80 pointer-events-none">
-                    <Image src="/images/corner-flourish.png" alt="" width={64} height={64} className="object-contain" />
-                </div>
-                <div className="absolute bottom-0 right-0 w-16 h-16 opacity-80 pointer-events-none rotate-180">
-                    <Image src="/images/corner-flourish.png" alt="" width={64} height={64} className="object-contain" />
-                </div>
-
-                <div className="space-y-2">
-                    <motion.p
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        className="text-gold font-sans tracking-[0.4em] uppercase text-sm"
-                    >
-                        Celebration
-                    </motion.p>
-                    <h2 className={`text-4xl md:text-7xl font-serif ${theme.primary}`}>
+            {/* Information Hierarchy */}
+            <div className="flex-1 text-center md:text-left space-y-10">
+                <div className="space-y-3">
+                    <p className="text-nav-label">Celebration</p>
+                    <h2 className={`text-section-title ${theme.primary} leading-tight`}>
                         {title}
                     </h2>
                 </div>
 
-                {/* Icon Rows - Wrapped in a centered container for mobile, left-aligned for desktop */}
-                <div className="flex flex-col items-center md:items-start space-y-6">
-                    <div className="w-full max-w-xs space-y-6">
-                        <div className="flex items-center gap-4 group">
-                            <div className={`p-2.5 rounded-full border ${theme.border} ${theme.primary} group-hover:bg-cream-dark transition-colors shrink-0`}>
-                                <Calendar size={20} />
-                            </div>
-                            <div className="text-left">
-                                <p className="text-xl font-serif text-charcoal">{date}</p>
-                                <p className="text-sm font-sans text-charcoal/60 lowercase tracking-widest">{time}</p>
-                            </div>
-                        </div>
+                <div className="space-y-6">
+                    {/* Stacked Info Blocks */}
+                    <div className="flex items-center justify-center md:justify-start gap-4">
+                        <Calendar className="text-gold" size={20} />
+                        <p className="text-xl md:text-2xl font-serif text-charcoal">{date}</p>
+                    </div>
 
-                        <div className="flex items-center gap-4 group">
-                            <div className={`p-2.5 rounded-full border ${theme.border} ${theme.primary} group-hover:bg-cream-dark transition-colors shrink-0`}>
-                                <MapPin size={20} />
-                            </div>
-                            <div className="text-left">
-                                <p className="text-xl font-serif text-charcoal">{venueName}</p>
-                                <p className="text-sm font-sans text-charcoal/60 leading-relaxed max-w-xs">{address}</p>
-                            </div>
+                    <div className="flex items-center justify-center md:justify-start gap-4">
+                        <Clock className="text-gold" size={20} />
+                        <p className="text-body-warm text-charcoal/80 uppercase tracking-widest">{time}</p>
+                    </div>
+
+                    <div className="flex items-center justify-center md:justify-start gap-4 items-start">
+                        <MapPin className="text-gold mt-1 shrink-0" size={20} />
+                        <div className="space-y-1">
+                            <p className="text-xl md:text-2xl font-serif text-charcoal">{venueName}</p>
+                            <p className="text-body-warm text-charcoal/60 leading-relaxed max-w-xs">{address}</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="pt-6 flex justify-center md:justify-start">
+                <div className="pt-6">
                     <motion.a
-                        href={mapUrl}
+                        href={googleMapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ x: 10 }}
-                        className={`inline-flex items-center gap-3 text-lg font-serif italic ${theme.primary} border-b-2 border-gold/40 pb-1 hover:border-gold transition-all`}
+                        className="hover-scale-tap inline-flex items-center gap-3 bg-[#3D2B52] text-white px-8 py-4 rounded-full font-serif italic text-lg shadow-xl"
                     >
-                        Navigate to venue
-                        <ChevronRight size={20} className="mt-1" />
+                        <Map size={20} />
+                        Open in Maps
                     </motion.a>
                 </div>
             </div>

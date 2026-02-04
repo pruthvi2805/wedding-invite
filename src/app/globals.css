@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
     background: #3D2B52;
-    /* Set to deep purple as requested */
+    /* Hero purple as fallback */
     color: rgb(var(--foreground-rgb));
     overflow-x: hidden;
 }
@@ -30,6 +30,56 @@ body {
     body {
         @apply font-sans;
     }
+
+    /* Typography Hierarchy */
+    .text-nav-label {
+        @apply text-xs font-sans tracking-[0.4em] uppercase opacity-60 text-gold;
+    }
+
+    .text-ceremonial-quote {
+        @apply text-2xl md:text-4xl font-serif italic text-white/90;
+    }
+
+    .text-hero-names {
+        @apply text-7xl md:text-9xl font-serif font-bold text-white leading-none;
+    }
+
+    .text-section-title {
+        @apply text-4xl md:text-7xl font-serif;
+    }
+
+    .text-event-label {
+        @apply text-lg md:text-xl font-serif italic;
+    }
+
+    .text-body-warm {
+        @apply text-base md:text-lg font-sans font-light tracking-wide leading-relaxed;
+    }
+}
+
+/* Animations */
+@layer utilities {
+    .animate-pulse-subtle {
+        animation: pulse-subtle 3s ease-in-out infinite;
+    }
+
+    .hover-scale-tap {
+        @apply transition-transform duration-200 active:scale-95 hover:scale-[1.02];
+    }
+}
+
+@keyframes pulse-subtle {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(10px);
+    }
 }
 
 /* Base Drawing Animation */
@@ -43,11 +93,6 @@ body {
     to {
         stroke-dashoffset: 0;
     }
-}
-
-/* Premium Typography Extensions */
-.tracking-widest-plus {
-    letter-spacing: 0.4em;
 }
 
 .text-shadow-sm {

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
 interface Petal {
     id: number;
@@ -12,24 +12,42 @@ interface Petal {
     rotation: number;
 }
 
-export const PetalAnimation = () => {
+interface PetalAnimationProps {
+    isStarted?: boolean;
+}
+
+export const PetalAnimation = ({ isStarted = true }: PetalAnimationProps) => {
     const [petals, setPetals] = useState<Petal[]>([]);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollY } = useScroll();
+
+    // Parallax effect: Petals float slightly faster/slower than scroll
+    const yRange = useTransform(scrollY, [0, 2000], [0, 400]);
 
     useEffect(() => {
-        const petalCount = 31; // Increased by 25% (25 * 1.25 = 31.25)
+        const petalCount = 31;
         const newPetals = Array.from({ length: petalCount }).map((_, i) => ({
             id: i,
             x: Math.random() * 100,
             delay: Math.random() * 10,
-            duration: 15 + Math.random() * 10, // Slower speed maintained
-            size: 15 + Math.random() * 25,
+            duration: 15 + Math.random() * 10,
+            size: 10 + Math.random() * 20, // Slightly smaller range
             rotation: Math.random() * 360,
         }));
         setPetals(newPetals);
     }, []);
 
+    if (!isStarted) return null;
+
     return (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden z-[5]">
+        <motion.div
+            ref={containerRef}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.5 }} // Sync with Hero fade
+            style={{ y: yRange }}
+            className="absolute inset-0 pointer-events-none overflow-hidden z-[5]"
+        >
             {petals.map((petal) => (
                 <motion.div
                     key={petal.id}
@@ -42,7 +60,7 @@ export const PetalAnimation = () => {
                     animate={{
                         top: "110%",
                         left: `${petal.x + (Math.random() * 10 - 5)}%`,
-                        opacity: [0, 1, 1, 0],
+                        opacity: [0, 0.6, 0.6, 0], // Lower max opacity near text
                         rotate: petal.rotation + 360
                     }}
                     transition={{
@@ -68,6 +86,6 @@ export const PetalAnimation = () => {
                     </svg>
                 </motion.div>
             ))}
-        </div>
+        </motion.div>
     );
 };

@@ -1,21 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { PetalAnimation } from "./PetalAnimation";
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface HeroProps {
     groomName?: string;
     brideName?: string;
-    groomParents?: string;
-    brideParents?: string;
 }
 
 export const Hero = ({
     groomName = "Pruthvi",
     brideName = "Akruthi",
-    groomParents = "Mr. Shiv Kumar & Mrs. Rakhi Kauticwar",
-    brideParents = "Mr. Shravan Kumar & Mrs. Padmaja Ananthula",
 }: HeroProps) => {
+    const [showIntro, setShowIntro] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setShowIntro(false), 2500);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <section className="min-h-screen w-screen bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
             {/* Background Texture Layer */}
@@ -23,76 +28,111 @@ export const Hero = ({
                 style={{ backgroundImage: 'repeating-linear-gradient(45deg, #D4AF37 0, #D4AF37 1px, transparent 0, transparent 50%)', backgroundSize: '10px 10px' }}
             />
 
-            {/* Floating Marigold Petals */}
-            <PetalAnimation />
-
-            {/* Content Wrapper - Better desktop balance */}
-            <div className="relative z-10 flex flex-col items-center text-center px-4 w-full h-full max-h-[85vh] justify-center py-20">
-
-                {/* Names Section - Slightly tighter for desktop */}
-                <div className="flex flex-col items-center gap-2 md:gap-4 mb-8 md:mb-12">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
-                        className="text-7xl md:text-9xl font-serif font-bold text-white leading-none tracking-tight"
-                    >
-                        {groomName}
-                    </motion.h1>
-
+            <AnimatePresence mode="wait">
+                {showIntro ? (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 1.2 }}
+                        key="intro"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, filter: "blur(10px)" }}
+                        transition={{ duration: 1 }}
+                        className="relative z-20 text-center px-6"
                     >
-                        <span className="text-4xl md:text-6xl font-serif text-[#D4AF37]">
-                            &
-                        </span>
+                        <p className="text-ceremonial-quote">
+                            Two families. Two traditions. One beginning.
+                        </p>
                     </motion.div>
-
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.5, delay: 0.8 }}
-                        className="text-7xl md:text-9xl font-serif font-bold text-white leading-none tracking-tight"
+                ) : (
+                    <motion.div
+                        key="hero"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1.5 }}
+                        className="relative w-full h-full flex flex-col items-center justify-center"
                     >
-                        {brideName}
-                    </motion.h1>
-                </div>
+                        {/* Floating Marigold Petals - Starts only after intro */}
+                        <PetalAnimation />
 
-                {/* Parents Section - Balanced gaps */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.2, delay: 2 }}
-                    className="flex flex-col items-center gap-2 mb-6 md:mb-8"
-                >
-                    <span className="text-xs font-sans tracking-widest uppercase text-[#D4AF37] opacity-60 mb-1">
-                        Families of
-                    </span>
-                    <div className="flex flex-col items-center gap-2 md:gap-3">
-                        <p className="text-white text-sm md:text-base font-light tracking-widest text-shadow-sm">
-                            {groomParents}
-                        </p>
-                        <span className="text-[#D4AF37] font-bold">×</span>
-                        <p className="text-white text-sm md:text-base font-light tracking-widest text-shadow-sm">
-                            {brideParents}
-                        </p>
-                    </div>
-                </motion.div>
+                        {/* Content Wrapper */}
+                        <div className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-[85vh] justify-center py-20">
 
-                {/* Tagline - 2rem from parents */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.8 }}
-                    transition={{ duration: 2, delay: 3 }}
-                    className="max-w-2xl mt-2 md:mt-4"
-                >
-                    <p className="text-lg md:text-2xl font-serif italic tracking-wide leading-relaxed text-white">
-                        Two families, two traditions, one celebration of love.
-                    </p>
-                </motion.div>
-            </div>
+                            {/* Welcoming Context */}
+                            <motion.span
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 0.6, y: 0 }}
+                                transition={{ delay: 1, duration: 1 }}
+                                className="text-nav-label mb-2"
+                            >
+                                You&apos;re invited to celebrate
+                            </motion.span>
+
+                            <motion.p
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 0.9, y: 0 }}
+                                transition={{ delay: 1.2, duration: 1 }}
+                                className="text-white text-lg md:text-xl font-serif italic mb-8"
+                            >
+                                {groomName} & {brideName} are getting married
+                            </motion.p>
+
+                            {/* Names Section */}
+                            <div className="flex flex-col items-center gap-2 md:gap-4 mb-10">
+                                <motion.h1
+                                    initial={{ opacity: 0, scale: 1.1 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 2, delay: 0.5 }}
+                                    className="text-hero-names text-shadow-lg"
+                                >
+                                    {groomName}
+                                </motion.h1>
+
+                                <motion.div
+                                    initial={{ opacity: 0, rotate: -45 }}
+                                    animate={{ opacity: 1, rotate: 0 }}
+                                    transition={{ duration: 1, delay: 1.5 }}
+                                >
+                                    <span className="text-4xl md:text-6xl font-serif text-[#D4AF37]">
+                                        &
+                                    </span>
+                                </motion.div>
+
+                                <motion.h1
+                                    initial={{ opacity: 0, scale: 1.1 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 2, delay: 0.8 }}
+                                    className="text-hero-names text-shadow-lg"
+                                >
+                                    {brideName}
+                                </motion.h1>
+                            </div>
+
+                            {/* Grounding Date */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 2, duration: 1 }}
+                                className="pt-4 border-t border-white/10"
+                            >
+                                <p className="text-white/80 text-lg md:text-xl font-serif tracking-widest">
+                                    Thursday, 12 March 2026
+                                </p>
+                            </motion.div>
+                        </div>
+
+                        {/* Scroll Affordance */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 3, duration: 1 }}
+                            className="absolute bottom-10 flex flex-col items-center gap-2 text-white/40 cursor-pointer animate-pulse-subtle"
+                            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+                        >
+                            <span className="text-xs uppercase tracking-[0.3em]">Scroll Down</span>
+                            <ChevronDown size={20} />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
