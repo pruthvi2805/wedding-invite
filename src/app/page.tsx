@@ -159,15 +159,31 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col md:flex-row items-center justify-center gap-8 pt-8">
-                        <motion.a
-                            href={whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover-scale-tap bg-[#FAF7F0] text-[#3D2B52] px-10 py-4 rounded-full font-serif font-medium flex items-center gap-3 shadow-2xl"
+                        <motion.button
+                            whileTap={{ scale: 0.95 }}
+                            onClick={async () => {
+                                const shareData = {
+                                    title: "Wedding Invitation | Pruthvi & Akruthi",
+                                    text: rsvp.message,
+                                    url: "https://akruthi.kpruthvi.com"
+                                };
+
+                                try {
+                                    if (navigator.share) {
+                                        await navigator.share(shareData);
+                                    } else {
+                                        window.open(whatsappUrl, '_blank');
+                                    }
+                                } catch (err) {
+                                    console.log('Error sharing:', err);
+                                    window.open(whatsappUrl, '_blank');
+                                }
+                            }}
+                            className="bg-[#FAF7F0] text-[#3D2B52] px-10 py-4 rounded-full font-serif font-medium flex items-center gap-3 shadow-2xl hover:bg-white transition-colors"
                         >
                             <Share2 size={20} />
                             Share Invitation
-                        </motion.a>
+                        </motion.button>
                     </div>
 
                     <div className="pt-24 border-t border-cream/10">

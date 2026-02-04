@@ -17,6 +17,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://akruthi.kpruthvi.com'),
     title: "Wedding Invitation | Pruthvi & Akruthi",
     description: "We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026.",
     openGraph: {
