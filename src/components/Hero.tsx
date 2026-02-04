@@ -50,44 +50,49 @@ export const Hero = ({
     const itemVariants = {
         hidden: {
             opacity: 0,
-            y: 15,
-            scale: 0.98,
-            filter: "blur(10px)"
+            y: 5,
+            scale: 1,
         },
         visible: (delay: number) => ({
             opacity: 1,
             y: 0,
             scale: 1,
-            filter: "blur(0px)",
             transition: {
                 delay,
-                duration: 1.8,
+                duration: 1.5,
                 ease: [0.22, 1, 0.36, 1] // Organic easeOutQuint
             }
         })
     };
 
     return (
-        <section className="min-h-[100dvh] w-screen bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
-            {/* Background Texture Layer */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
-                style={{ backgroundImage: 'repeating-linear-gradient(45deg, #D4AF37 0, #D4AF37 1px, transparent 0, transparent 50%)', backgroundSize: '10px 10px' }}
-            />
+        <section className="min-h-[100dvh] w-full bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
+            {/*
+                BACKGROUND LAYER:
+                Positioned absolute inset-0 so it covers the entire section
+                and stays consistent whether the intro or hero is visible.
+            */}
+            <div className="absolute inset-0 z-0 bg-[#3D2B52]">
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                    style={{ backgroundImage: 'repeating-linear-gradient(45deg, #D4AF37 0, #D4AF37 1px, transparent 0, transparent 50%)', backgroundSize: '10px 10px' }}
+                />
+            </div>
 
-            {/* Intro Screen - Contemplative Blur Exit */}
-            <AnimatePresence>
+            {/* Intro Screen - Clean Fade Exit, inside the section container */}
+            <AnimatePresence mode="wait">
                 {!startHero && (
                     <motion.div
+                        key="intro-screen"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, filter: "blur(10px)", scale: 1.05 }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-[#3D2B52] px-6 text-center"
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1.2, ease: "easeInOut" }}
+                        className="absolute inset-0 z-50 flex items-center justify-center px-6 text-center"
                     >
                         <motion.p
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 2, delay: 0.5 }}
+                            transition={{ duration: 1.8, delay: 0.5 }}
                             className="text-2xl md:text-3xl font-serif italic text-white/90 leading-relaxed tracking-wide"
                         >
                             Two families. Two traditions.<br />One beginning.
@@ -96,13 +101,14 @@ export const Hero = ({
                 )}
             </AnimatePresence>
 
-            {/* Floating Marigold Petals - Drifting with the reveal */}
+            {/* Floating Marigold Petals */}
             <PetalAnimation isStarted={startPetals} />
 
             {/* Content Wrapper - Precision Hierarchy */}
             <AnimatePresence>
                 {startHero && (
                     <motion.div
+                        key="hero-content"
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
@@ -121,7 +127,7 @@ export const Hero = ({
                         {/* 2. Huge: Names - Staggered Unfolding */}
                         <div className="flex flex-col items-center gap-1 mb-6">
                             <motion.h1
-                                custom={0.6}
+                                custom={0.5}
                                 variants={itemVariants}
                                 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg"
                             >
@@ -129,7 +135,7 @@ export const Hero = ({
                             </motion.h1>
 
                             <motion.div
-                                custom={1.1}
+                                custom={0.9}
                                 variants={itemVariants}
                                 className="py-1"
                             >
@@ -139,7 +145,7 @@ export const Hero = ({
                             </motion.div>
 
                             <motion.h1
-                                custom={1.6}
+                                custom={1.3}
                                 variants={itemVariants}
                                 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg"
                             >
@@ -149,7 +155,7 @@ export const Hero = ({
 
                         {/* 3. Medium: are getting married */}
                         <motion.p
-                            custom={2.2}
+                            custom={1.8}
                             variants={itemVariants}
                             className="text-2xl font-serif italic text-white/80 mb-6"
                         >
@@ -158,7 +164,7 @@ export const Hero = ({
 
                         {/* 4. Small: Date + City */}
                         <motion.div
-                            custom={2.8}
+                            custom={2.3}
                             variants={itemVariants}
                             className="pt-6 border-t border-white/5 w-full max-w-[280px]"
                         >
@@ -175,10 +181,11 @@ export const Hero = ({
             <AnimatePresence>
                 {!hasScrolled && startHero && (
                     <motion.div
+                        key="scroll-hint"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ delay: 5, duration: 2 }}
+                        transition={{ delay: 4, duration: 1.5 }}
                         className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20 cursor-pointer"
                         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                     >
