@@ -132,68 +132,69 @@ export default function Home() {
                         }
                     />
                 </div>
+            </div>
 
-                {/* Footer / RSVP / Share */}
-                <footer className="relative bg-[#3D2B52] text-[#FFFDF5] py-32 px-6 text-center overflow-hidden">
-                    <div className="absolute bottom-0 left-0 w-full h-20 pointer-events-none z-20 bg-gradient-to-t from-black/10 to-transparent" />
+            {/* Footer / RSVP / Share */}
+            <footer className="relative bg-[#3D2B52] text-[#FFFDF5] py-32 px-6 text-center overflow-hidden">
+                <div className="absolute bottom-0 left-0 w-full h-20 pointer-events-none z-20 bg-gradient-to-t from-black/10 to-transparent" />
 
-                    <div className="absolute inset-0 opacity-10 pointer-events-none">
-                        <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full border-[20px] border-gold/20" />
-                        <div className="absolute -bottom-48 -right-48 w-[500px] h-[500px] rounded-full border-[40px] border-gold/10" />
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                    <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full border-[20px] border-gold/20" />
+                    <div className="absolute -bottom-48 -right-48 w-[500px] h-[500px] rounded-full border-[40px] border-gold/10" />
+                </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="relative z-10 max-w-2xl mx-auto space-y-12"
+                >
+                    <div className="flex justify-center text-gold mb-8">
+                        <Heart size={48} strokeWidth={1} />
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="relative z-10 max-w-2xl mx-auto space-y-12"
-                    >
-                        <div className="flex justify-center text-gold mb-8">
-                            <Heart size={48} strokeWidth={1} />
-                        </div>
+                    <h2 className="text-5xl md:text-6xl font-serif">We await your presence</h2>
 
-                        <h2 className="text-5xl md:text-6xl font-serif">We await your presence</h2>
+                    <p className="text-body-warm italic text-gold/80 leading-relaxed px-4">
+                        &quot;Your blessings and presence are the most precious gifts we could receive.
+                        Join us as we embark on this beautiful journey together.&quot;
+                    </p>
 
-                        <p className="text-body-warm italic text-gold/80 leading-relaxed px-4">
-                            &quot;Your blessings and presence are the most precious gifts we could receive.
-                            Join us as we embark on this beautiful journey together.&quot;
-                        </p>
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-8 pt-8">
+                        <motion.button
+                            whileTap={{ scale: 0.95 }}
+                            onClick={async () => {
+                                const shareData = {
+                                    title: "Wedding Invitation | Pruthvi & Akruthi",
+                                    text: rsvp.message,
+                                    url: "https://akruthi.kpruthvi.com"
+                                };
 
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-8 pt-8">
-                            <motion.button
-                                whileTap={{ scale: 0.95 }}
-                                onClick={async () => {
-                                    const shareData = {
-                                        title: "Wedding Invitation | Pruthvi & Akruthi",
-                                        text: rsvp.message,
-                                        url: "https://akruthi.kpruthvi.com"
-                                    };
-
-                                    try {
-                                        if (navigator.share) {
-                                            await navigator.share(shareData);
-                                        } else {
-                                            window.open(whatsappUrl, '_blank');
-                                        }
-                                    } catch (err) {
-                                        console.log('Error sharing:', err);
+                                try {
+                                    if (navigator.share) {
+                                        await navigator.share(shareData);
+                                    } else {
                                         window.open(whatsappUrl, '_blank');
                                     }
-                                }}
-                                className="bg-[#FAF7F0] text-[#3D2B52] px-10 py-4 rounded-full font-serif font-medium flex items-center gap-3 shadow-2xl hover:bg-white transition-colors"
-                            >
-                                <Share2 size={20} />
-                                Share Invitation
-                            </motion.button>
-                        </div>
+                                } catch (err) {
+                                    console.log('Error sharing:', err);
+                                    window.open(whatsappUrl, '_blank');
+                                }
+                            }}
+                            className="bg-[#FAF7F0] text-[#3D2B52] px-10 py-4 rounded-full font-serif font-medium flex items-center gap-3 shadow-2xl hover:bg-white transition-colors"
+                        >
+                            <Share2 size={20} />
+                            Share Invitation
+                        </motion.button>
+                    </div>
 
-                        <div className="pt-24 border-t border-cream/10">
-                            <p className="text-nav-label opacity-45">
-                                {groom.name} & {bride.name} • {events.wedding.date.split(',')[1].trim().split(' ')[1]} {events.wedding.date.split(',')[1].trim().split(' ')[2]}
-                            </p>
-                        </div>
-                    </motion.div>
-                </footer>
+                    <div className="pt-24 border-t border-cream/10">
+                        <p className="text-nav-label opacity-45">
+                            {groom.name} & {bride.name} • {events.wedding.date.split(',')[1].trim().split(' ')[1]} {events.wedding.date.split(',')[1].trim().split(' ')[2]}
+                        </p>
+                    </div>
+                </motion.div>
+            </footer>
         </main>
     );
 }
