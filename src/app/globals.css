@@ -7,16 +7,26 @@
     --background-rgb: 250, 247, 240;
 }
 
+html,
 body {
     background: #3D2B52;
+    background-color: #3D2B52;
+    overscroll-behavior-y: none;
+    /* Stabilization */
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
     overflow-x: hidden;
 }
 
 /* Eliminate subpixel gaps in stacking */
-section,
-.relative {
-    margin-top: -1px;
-    padding-top: 1px;
+section {
+    display: block;
+    position: relative;
+    width: 100%;
 }
 
 @layer base {

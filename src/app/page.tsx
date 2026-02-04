@@ -45,10 +45,6 @@ export default function Home() {
                     </motion.div>
                 )}
             </AnimatePresence>
-            {/* Global Grainy Texture */}
-            <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]">
-                <div className="absolute top-0 left-0 w-full h-full bg-[#E5E5E5] mix-blend-multiply" />
-            </div>
 
             {/* Hero Section - The guided entry starts here */}
             <Hero
@@ -56,8 +52,11 @@ export default function Home() {
                 brideName={bride.name}
             />
 
-            {/* Transitional Flow - CLEAN STACKING WITH SWOOSH BLEND */}
-            <div className="relative bg-[#F7F3E8] space-y-40 pb-32 pt-12">
+            {/* 
+                SECTION STACKING: 
+                Clean, architectural stacking with generous spacing.
+            */}
+            <div className="relative bg-[#F7F3E8] space-y-48 py-32 z-10 w-full">
                 {/* Warmer Family Section */}
                 <section className="relative px-6 text-center space-y-8">
                     <motion.div
