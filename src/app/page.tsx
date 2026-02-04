@@ -56,94 +56,86 @@ export default function Home() {
                 brideName={bride.name}
             />
 
-            {/* Transitional Flow - SEAMLESS BLENDING */}
-            <div className="relative bg-[#3D2B52]">
-                {/* Hero to Events Gradient */}
-                <div className="h-32 bg-gradient-to-b from-[#3D2B52] to-[#F7F3E8]" />
+            {/* Transitional Flow - CLEAN STACKING */}
+            <div className="relative bg-[#F7F3E8] space-y-32 py-24">
+                {/* Warmer Family Section */}
+                <section className="relative px-6 text-center space-y-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="space-y-6"
+                    >
+                        <span className="text-[10px] uppercase tracking-[0.4em] text-[#3D2B52]/60 block font-sans font-bold">
+                            With blessings from
+                        </span>
 
-                <div className="bg-[#F7F3E8] space-y-24 py-12">
-                    {/* Warmer Family Section */}
-                    <section className="relative px-6 text-center space-y-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            className="space-y-6"
-                        >
-                            <span className="text-[10px] uppercase tracking-[0.4em] text-[#3D2B52]/60 block font-sans font-bold">
-                                With blessings from
-                            </span>
-
-                            <div className="space-y-10">
-                                <div className="space-y-2">
-                                    <p className="text-2xl font-serif text-[#3D2B52] font-semibold leading-tight px-4">
-                                        {groom.parents}
-                                    </p>
-                                    <p className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-sans font-bold">
-                                        Groom&apos;s Family
-                                    </p>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <p className="text-2xl font-serif text-[#3D2B52] font-semibold leading-tight px-4">
-                                        {bride.parents}
-                                    </p>
-                                    <p className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-sans font-bold">
-                                        Bride&apos;s Family
-                                    </p>
-                                </div>
+                        <div className="space-y-10">
+                            <div className="space-y-2">
+                                <p className="text-2xl font-serif text-[#3D2B52] font-semibold leading-tight px-4">
+                                    {groom.parents}
+                                </p>
+                                <p className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-sans font-bold">
+                                    Groom&apos;s Family
+                                </p>
                             </div>
-                        </motion.div>
 
-                        {/* Symbolic Divider */}
-                        <div className="flex justify-center pt-8">
-                            <div className="w-8 h-[1px] bg-gold/30" />
-                            <div className="mx-3 w-1.5 h-1.5 rounded-full border border-gold rotate-45" />
-                            <div className="w-8 h-[1px] bg-gold/30" />
+                            <div className="space-y-2">
+                                <p className="text-2xl font-serif text-[#3D2B52] font-semibold leading-tight px-4">
+                                    {bride.parents}
+                                </p>
+                                <p className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-sans font-bold">
+                                    Bride&apos;s Family
+                                </p>
+                            </div>
                         </div>
-                    </section>
+                    </motion.div>
 
-                    <EventCard
-                        title={events.wedding.title}
-                        date={events.wedding.date}
-                        time={events.wedding.time}
-                        venueName={events.wedding.venue}
-                        address={events.wedding.address}
-                        googleMapsUrl={events.wedding.googleMapsUrl}
-                        accentColor="purple"
-                        icon={
-                            <Image
-                                src="/images/wedding-couple-clean.png"
-                                alt="Wedding"
-                                fill
-                                className="object-contain"
-                                sizes="300px"
-                            />
-                        }
-                    />
+                    {/* Symbolic Divider */}
+                    <div className="flex justify-center pt-8">
+                        <div className="w-8 h-[1px] bg-gold/30" />
+                        <div className="mx-3 w-1.5 h-1.5 rounded-full border border-gold rotate-45" />
+                        <div className="w-8 h-[1px] bg-gold/30" />
+                    </div>
+                </section>
 
-                    <EventCard
-                        title={events.reception.title}
-                        date={events.reception.date}
-                        time={events.reception.time}
-                        venueName={events.reception.venue}
-                        address={events.reception.address}
-                        googleMapsUrl={events.reception.googleMapsUrl}
-                        accentColor="marigold"
-                        icon={
-                            <Image
-                                src="/images/reception-couple-clean.png"
-                                alt="Reception"
-                                fill
-                                className="object-contain"
-                                sizes="300px"
-                            />
-                        }
-                    />
-                </div>
+                <EventCard
+                    title={events.wedding.title}
+                    date={events.wedding.date}
+                    time={events.wedding.time}
+                    venueName={events.wedding.venue}
+                    address={events.wedding.address}
+                    googleMapsUrl={events.wedding.googleMapsUrl}
+                    accentColor="purple"
+                    icon={
+                        <Image
+                            src="/images/wedding-couple-clean.png"
+                            alt="Wedding"
+                            fill
+                            className="object-contain"
+                            sizes="300px"
+                        />
+                    }
+                />
 
-                {/* Events to Footer Gradient */}
-                <div className="h-32 bg-gradient-to-b from-[#F7F3E8] to-[#3D2B52]" />
+                <EventCard
+                    title={events.reception.title}
+                    date={events.reception.date}
+                    time={events.reception.time}
+                    venueName={events.reception.venue}
+                    address={events.reception.address}
+                    googleMapsUrl={events.reception.googleMapsUrl}
+                    accentColor="marigold"
+                    icon={
+                        <Image
+                            src="/images/reception-couple-clean.png"
+                            alt="Reception"
+                            fill
+                            className="object-contain"
+                            sizes="300px"
+                        />
+                    }
+                />
             </div>
 
             {/* Footer / RSVP / Share */}
