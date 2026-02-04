@@ -48,7 +48,7 @@ export const Hero = ({
     };
 
     return (
-        <section className="min-h-[100dvh] w-full bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
+        <section className="h-[100dvh] w-full bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
             {/* 
                 BACKGROUND LAYER: 
                 Positioned absolute inset-0 so it covers the entire section 
@@ -94,7 +94,7 @@ export const Hero = ({
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="relative z-10 flex flex-col items-center text-center px-6 w-full justify-center py-20"
+                        className="relative z-10 flex flex-col items-center text-center px-6 w-full justify-center pb-32"
                     >
 
                         {/* 1. Small Text: You're invited */}
@@ -104,7 +104,7 @@ export const Hero = ({
 
                         {/* 2. Huge: Names */}
                         <div className="flex flex-col items-center gap-1 mb-6">
-                            <h1 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
+                            <h1 className="text-[4.2rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
                                 {groomName}
                             </h1>
 
@@ -114,18 +114,18 @@ export const Hero = ({
                                 </span>
                             </div>
 
-                            <h1 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
+                            <h1 className="text-[4.2rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
                                 {brideName}
                             </h1>
                         </div>
 
                         {/* 3. Medium: are getting married */}
-                        <p className="text-2xl font-serif italic text-white/80 mb-6">
+                        <p className="text-2xl font-serif italic text-white/80 mb-6 font-medium">
                             are getting married
                         </p>
 
                         {/* 4. Small: Date + City */}
-                        <div className="pt-6 border-t border-white/5 w-full max-w-[280px]">
+                        <div className="pt-6 border-t border-white/5 w-full max-w-[240px]">
                             <p className="text-[11px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
                                 Thursday, 12 March 2026 <br />
                                 Jagityala, Telangana
@@ -134,6 +134,17 @@ export const Hero = ({
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Premium Transition - SVG Curve */}
+            <div className="absolute bottom-0 left-0 w-full leading-[0] z-20">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="w-full h-[80px] sm:h-[120px]">
+                    <path
+                        fill="#F7F3E8"
+                        fillOpacity="1"
+                        d="M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                    ></path>
+                </svg>
+            </div>
 
             {/* Subtle Scroll Hint */}
             <AnimatePresence>
@@ -144,9 +155,9 @@ export const Hero = ({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ delay: 2, duration: 1 }}
-                        className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20"
+                        className="absolute bottom-24 flex flex-col items-center gap-1 text-white/20 z-30"
                     >
-                        <span className="text-[9px] uppercase tracking-[0.6em] font-sans">Scroll</span>
+                        <span className="text-[9px] uppercase tracking-[0.6em] font-sans">Scroll To Reveal</span>
                         <ChevronDown size={14} strokeWidth={1} className="animate-bounce" />
                     </motion.div>
                 )}

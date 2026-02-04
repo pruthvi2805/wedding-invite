@@ -56,8 +56,8 @@ export default function Home() {
                 brideName={bride.name}
             />
 
-            {/* Transitional Flow - CLEAN STACKING */}
-            <div className="relative bg-[#F7F3E8] space-y-32 py-24">
+            {/* Transitional Flow - CLEAN STACKING WITH SWOOSH BLEND */}
+            <div className="relative bg-[#F7F3E8] space-y-40 pb-32 pt-12">
                 {/* Warmer Family Section */}
                 <section className="relative px-6 text-center space-y-8">
                     <motion.div
