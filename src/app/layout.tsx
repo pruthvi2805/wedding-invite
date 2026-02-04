@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import { DeviceRestriction } from "@/components/DeviceRestriction";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -11,7 +10,7 @@ const inter = Inter({
 
 const cormorant = Cormorant_Garamond({
     subsets: ["latin"],
-    weight: ["300", "400", "500", "600", "700"],
+    weight: ["400", "600"],
     variable: "--font-cormorant",
     display: "swap"
 });
@@ -64,9 +63,7 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
             <body className="bg-[#3D2B52] text-charcoal antialiased">
-                <DeviceRestriction>
-                    {children}
-                </DeviceRestriction>
+                {children}
             </body>
         </html>
     );

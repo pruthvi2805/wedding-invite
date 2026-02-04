@@ -41,5 +41,5 @@ export const weddingDetails = {
         whatsappNumber: "", // Empty for generic share
         message: "We are delighted to invite you to the wedding of Pruthvi & Akruthi. Please join us in celebrating our union! View Invitation: "
     },
-    tagline: "Two families, two traditions, one celebration of love."
+    tagline: "Two families, two traditions, one joyous celebration."
 };
