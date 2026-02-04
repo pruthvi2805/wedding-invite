@@ -26,15 +26,46 @@ export const Hero = ({
         });
     }, [scrollY]);
 
-    // Sequencing: Intro -> Hero -> Petals
+    // Sequencing: Fluid Unfolding
     useEffect(() => {
-        const heroTimer = setTimeout(() => setStartHero(true), 2500);
-        const petalTimer = setTimeout(() => setStartPetals(true), 4000); // Start during name reveal
+        // Hero starts emerging while intro is still fading
+        const heroTimer = setTimeout(() => setStartHero(true), 1800);
+        // Petals start drifting as the names begin to unfold
+        const petalTimer = setTimeout(() => setStartPetals(true), 3000);
         return () => {
             clearTimeout(heroTimer);
             clearTimeout(petalTimer);
         };
     }, []);
+
+    // Animation Variants for "Fluid Unfolding"
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { duration: 2, ease: "easeOut" }
+        }
+    };
+
+    const itemVariants = {
+        hidden: {
+            opacity: 0,
+            y: 15,
+            scale: 0.98,
+            filter: "blur(10px)"
+        },
+        visible: (delay: number) => ({
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            transition: {
+                delay,
+                duration: 1.8,
+                ease: [0.22, 1, 0.36, 1] // Organic easeOutQuint
+            }
+        })
+    };
 
     return (
         <section className="min-h-[100dvh] w-screen bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
@@ -43,21 +74,21 @@ export const Hero = ({
                 style={{ backgroundImage: 'repeating-linear-gradient(45deg, #D4AF37 0, #D4AF37 1px, transparent 0, transparent 50%)', backgroundSize: '10px 10px' }}
             />
 
-            {/* Intro Screen */}
+            {/* Intro Screen - Contemplative Blur Exit */}
             <AnimatePresence>
                 {!startHero && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
+                        exit={{ opacity: 0, filter: "blur(10px)", scale: 1.05 }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
                         className="fixed inset-0 z-50 flex items-center justify-center bg-[#3D2B52] px-6 text-center"
                     >
                         <motion.p
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1.5, delay: 0.5 }}
-                            className="text-2xl md:text-3xl font-serif italic text-white/90 leading-relaxed"
+                            transition={{ duration: 2, delay: 0.5 }}
+                            className="text-2xl md:text-3xl font-serif italic text-white/90 leading-relaxed tracking-wide"
                         >
                             Two families. Two traditions.<br />One beginning.
                         </motion.p>
@@ -65,55 +96,52 @@ export const Hero = ({
                 )}
             </AnimatePresence>
 
-            {/* Floating Marigold Petals - Delayed Start */}
+            {/* Floating Marigold Petals - Drifting with the reveal */}
             <PetalAnimation isStarted={startPetals} />
 
             {/* Content Wrapper - Precision Hierarchy */}
             <AnimatePresence>
                 {startHero && (
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1.5 }}
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
                         className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-lg justify-center py-20"
                     >
 
                         {/* 1. Small Text: You're invited */}
                         <motion.span
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 0.6, y: 0 }}
-                            transition={{ duration: 1, delay: 0.4 }}
-                            className="text-xs font-sans tracking-[0.4em] uppercase text-gold mb-4"
+                            custom={0}
+                            variants={itemVariants}
+                            className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans"
                         >
                             You&apos;re invited
                         </motion.span>
 
-                        {/* 2. Huge: Names */}
-                        <div className="flex flex-col items-center gap-2 mb-6">
+                        {/* 2. Huge: Names - Staggered Unfolding */}
+                        <div className="flex flex-col items-center gap-1 mb-6">
                             <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1.2, delay: 0.8 }}
-                                className="text-[4.5rem] leading-[0.9] font-serif font-bold text-white tracking-tight text-shadow-lg"
+                                custom={0.6}
+                                variants={itemVariants}
+                                className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg"
                             >
                                 {groomName}
                             </motion.h1>
 
                             <motion.div
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8, delay: 1.6 }}
+                                custom={1.1}
+                                variants={itemVariants}
+                                className="py-1"
                             >
-                                <span className="text-3xl font-serif text-[#D4AF37] italic">
+                                <span className="text-3xl font-serif text-[#D4AF37] italic opacity-80">
                                     &
                                 </span>
                             </motion.div>
 
                             <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1.2, delay: 2.2 }}
-                                className="text-[4.5rem] leading-[0.9] font-serif font-bold text-white tracking-tight text-shadow-lg"
+                                custom={1.6}
+                                variants={itemVariants}
+                                className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg"
                             >
                                 {brideName}
                             </motion.h1>
@@ -121,23 +149,22 @@ export const Hero = ({
 
                         {/* 3. Medium: are getting married */}
                         <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.9 }}
-                            transition={{ delay: 3.0, duration: 1 }}
-                            className="text-2xl font-serif italic text-white/90 mb-4"
+                            custom={2.2}
+                            variants={itemVariants}
+                            className="text-2xl font-serif italic text-white/80 mb-6"
                         >
                             are getting married
                         </motion.p>
 
                         {/* 4. Small: Date + City */}
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.7 }}
-                            transition={{ delay: 3.6, duration: 1 }}
-                            className="pt-4 border-t border-white/10"
+                            custom={2.8}
+                            variants={itemVariants}
+                            className="pt-6 border-t border-white/5 w-full max-w-[280px]"
                         >
-                            <p className="text-sm font-sans tracking-widest text-white/80">
-                                Thursday, 12 March 2026 • Jagityala, Telangana
+                            <p className="text-[11px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
+                                Thursday, 12 March 2026 <br />
+                                Jagityala, Telangana
                             </p>
                         </motion.div>
                     </motion.div>
@@ -151,12 +178,12 @@ export const Hero = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ delay: 4.5, duration: 1 }}
-                        className="absolute bottom-12 flex flex-col items-center gap-1 text-white/30 cursor-pointer animate-pulse-subtle"
+                        transition={{ delay: 5, duration: 2 }}
+                        className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20 cursor-pointer"
                         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                     >
-                        <span className="text-[10px] uppercase tracking-[0.5em] font-sans">Scroll</span>
-                        <ChevronDown size={14} strokeWidth={1} />
+                        <span className="text-[9px] uppercase tracking-[0.6em] font-sans">Scroll</span>
+                        <ChevronDown size={14} strokeWidth={1} className="animate-bounce" />
                     </motion.div>
                 )}
             </AnimatePresence>
