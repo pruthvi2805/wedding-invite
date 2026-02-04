@@ -64,19 +64,19 @@ export const Hero = ({
                 <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans">
                     You&apos;re invited
                 </span>
-                <span className={`text-xs uppercase tracking-[0.35em] text-gold/80 font-sans ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "0.15s" }}>
+                <span className={`text-xs uppercase tracking-[0.35em] text-gold/80 font-sans ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "0.2s" }}>
                     To the wedding ceremony
                 </span>
 
                 <div className="flex flex-col items-center gap-1 mb-5 mt-5">
                     <h1
                         className={`text-[4rem] leading-[0.85] font-serif font-bold text-white tracking-tighter ${startHero ? "animate-hero-name" : "opacity-0"}`}
-                        style={{ animationDelay: "0.3s" }}
+                        style={{ animationDelay: "0.4s" }}
                     >
                         {groomName}
                     </h1>
 
-                    <div className={`py-0.5 ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "0.6s" }}>
+                    <div className={`py-0.5 ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "0.7s" }}>
                         <span className="text-2xl font-serif text-[#D4AF37] italic opacity-80">
                             &
                         </span>
@@ -84,17 +84,17 @@ export const Hero = ({
 
                     <h1
                         className={`text-[4rem] leading-[0.85] font-serif font-bold text-white tracking-tighter ${startHero ? "animate-hero-name" : "opacity-0"}`}
-                        style={{ animationDelay: "0.8s" }}
+                        style={{ animationDelay: "1.0s" }}
                     >
                         {brideName}
                     </h1>
                 </div>
 
-                <p className={`text-xl font-serif italic text-white/80 mb-6 ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "1.1s" }}>
+                <p className={`text-xl font-serif italic text-white/80 mb-6 ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "1.4s" }}>
                     are getting married
                 </p>
 
-                <div className={`pt-6 border-t border-white/5 w-full max-w-[220px] ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "1.3s" }}>
+                <div className={`pt-6 border-t border-white/5 w-full max-w-[220px] ${startHero ? "animate-hero-fade" : "opacity-0"}`} style={{ animationDelay: "1.7s" }}>
                     <p className="text-[10px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
                         Thursday, 12 March 2026 <br />
                         Jagityala, Telangana

@@ -89,11 +89,13 @@ section {
     }
 
     .animate-hero-fade {
-        animation: hero-fade 0.7s ease-out forwards;
+        animation: hero-fade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        will-change: transform, opacity;
     }
 
     .animate-hero-name {
-        animation: hero-fade 0.7s ease-out forwards;
+        animation: hero-fade 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        will-change: transform, opacity;
     }
 
     .animate-hero-bg {
@@ -130,7 +132,7 @@ section {
 @keyframes hero-fade {
     from {
         opacity: 0;
-        transform: translate3d(0, 8px, 0);
+        transform: translate3d(0, 4px, 0);
     }
 
     to {
