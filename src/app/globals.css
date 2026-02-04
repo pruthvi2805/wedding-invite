@@ -8,11 +8,7 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
     background: #3D2B52;
-    /* Hero purple as fallback */
-    color: rgb(var(--foreground-rgb));
     overflow-x: hidden;
 }
 
