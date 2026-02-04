@@ -15,25 +15,15 @@ const cormorant = Cormorant_Garamond({
     display: "swap"
 });
 
-// # Wedding Invitation Project Tasks
-//
-// - [x] Final Hero Reset & Polish
-// - [x] Cloudflare Deployment & Subdomain Setup
-// - [ ] Post-Deployment Refinements [IN PROGRESS]
-//     - [ ] Update website metadata (tab title)
-//     - [ ] Refine desktop hero spacing and layout
-//     - [ ] Final PUSH to GitHub
-// - [x] Optimization & Performance
-
 export const metadata: Metadata = {
     metadataBase: new URL("https://wedding-invite.pages.dev"),
-    title: "Wedding Invitation | Pruthviraj & Sravani",
-    description: "We are joyfully inviting you to celebrate the wedding of Pruthviraj and Sravani. 12th March 2026.",
+    title: "Wedding Invitation | Pruthvi & Akruthi",
+    description: "We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026.",
     openGraph: {
-        title: "Wedding Invitation | Pruthviraj & Sravani",
-        description: "You're cordially invited to celebrate the wedding of Pruthviraj and Sravani.",
+        title: "Wedding Invitation | Pruthvi & Akruthi",
+        description: "You're cordially invited to celebrate the wedding of Pruthvi and Akruthi.",
         url: "https://wedding-invite.pages.dev",
-        siteName: "Pruthviraj & Sravani Wedding",
+        siteName: "Pruthvi & Akruthi Wedding",
         images: [
             {
                 url: "/og-image.jpg",
@@ -47,8 +37,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Wedding Invitation | Pruthviraj & Sravani",
-        description: "You're cordially invited to celebrate the wedding of Pruthviraj and Sravani.",
+        title: "Wedding Invitation | Pruthvi & Akruthi",
+        description: "You're cordially invited to celebrate the wedding of Pruthvi and Akruthi.",
         images: ["/og-image.jpg"],
     },
 };
