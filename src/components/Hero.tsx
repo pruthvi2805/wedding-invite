@@ -30,7 +30,7 @@ export const Hero = ({
     useEffect(() => {
         // Hero starts emerging while intro is still fading
         const heroTimer = setTimeout(() => setStartHero(true), 1800);
-        // Petals start drifting earlier, syncing with the name reveal
+        // Petals start fading in gently
         const petalTimer = setTimeout(() => setStartPetals(true), 2200);
         return () => {
             clearTimeout(heroTimer);
@@ -38,38 +38,20 @@ export const Hero = ({
         };
     }, []);
 
-    // Animation Variants for "Fluid Unfolding"
+    // Simple container fade only - NO movement
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: { duration: 2.2, ease: "easeOut" }
+            transition: { duration: 1.5, ease: "easeInOut" }
         }
-    };
-
-    const itemVariants = {
-        hidden: {
-            opacity: 0,
-            y: 5,
-            scale: 1,
-        },
-        visible: (delay: number) => ({
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: {
-                delay,
-                duration: 2.2, // Slower, more relaxed pacing
-                ease: [0.22, 1, 0.36, 1] // Organic easeOutQuint
-            }
-        })
     };
 
     return (
         <section className="min-h-[100dvh] w-full bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center">
-            {/*
-                BACKGROUND LAYER:
-                Positioned absolute inset-0 so it covers the entire section
+            {/* 
+                BACKGROUND LAYER: 
+                Positioned absolute inset-0 so it covers the entire section 
                 and stays consistent whether the intro or hero is visible.
             */}
             <div className="absolute inset-0 z-0 bg-[#3D2B52]">
@@ -78,7 +60,7 @@ export const Hero = ({
                 />
             </div>
 
-            {/* Intro Screen - Clean Fade Exit, inside the section container */}
+            {/* Intro Screen - Clean Fade Exit */}
             <AnimatePresence mode="wait">
                 {!startHero && (
                     <motion.div
@@ -86,13 +68,13 @@ export const Hero = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 1.2, ease: "easeInOut" }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
                         className="absolute inset-0 z-50 flex items-center justify-center px-6 text-center"
                     >
                         <motion.p
-                            initial={{ opacity: 0, y: 5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1.8, delay: 0.5 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1 }}
                             className="text-2xl md:text-3xl font-serif italic text-white/90 leading-relaxed tracking-wide"
                         >
                             Two families. Two traditions.<br />One beginning.
@@ -104,7 +86,7 @@ export const Hero = ({
             {/* Floating Marigold Petals */}
             <PetalAnimation isStarted={startPetals} />
 
-            {/* Content Wrapper - Precision Hierarchy */}
+            {/* Content Wrapper - STATIC FADE ONLY */}
             <AnimatePresence>
                 {startHero && (
                     <motion.div
@@ -115,69 +97,45 @@ export const Hero = ({
                         className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-lg justify-center py-20"
                     >
 
-                        {/* 1. Small Text: You're invited */}
-                        <motion.span
-                            custom={0}
-                            variants={itemVariants}
-                            className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans"
-                        >
+                        {/* 1. Small Text: You're invited - STATIC */}
+                        <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans">
                             You&apos;re invited
-                        </motion.span>
+                        </span>
 
-                        {/* 2. Huge: Names - Staggered Unfolding */}
+                        {/* 2. Huge: Names - STATIC */}
                         <div className="flex flex-col items-center gap-1 mb-6">
-                            <motion.h1
-                                custom={0.5}
-                                variants={itemVariants}
-                                className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg"
-                            >
+                            <h1 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
                                 {groomName}
-                            </motion.h1>
+                            </h1>
 
-                            <motion.div
-                                custom={0.9}
-                                variants={itemVariants}
-                                className="py-1"
-                            >
+                            <div className="py-1">
                                 <span className="text-3xl font-serif text-[#D4AF37] italic opacity-80">
                                     &
                                 </span>
-                            </motion.div>
+                            </div>
 
-                            <motion.h1
-                                custom={1.3}
-                                variants={itemVariants}
-                                className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg"
-                            >
+                            <h1 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
                                 {brideName}
-                            </motion.h1>
+                            </h1>
                         </div>
 
-                        {/* 3. Medium: are getting married */}
-                        <motion.p
-                            custom={1.8}
-                            variants={itemVariants}
-                            className="text-2xl font-serif italic text-white/80 mb-6"
-                        >
+                        {/* 3. Medium: are getting married - STATIC */}
+                        <p className="text-2xl font-serif italic text-white/80 mb-6">
                             are getting married
-                        </motion.p>
+                        </p>
 
-                        {/* 4. Small: Date + City */}
-                        <motion.div
-                            custom={2.3}
-                            variants={itemVariants}
-                            className="pt-6 border-t border-white/5 w-full max-w-[280px]"
-                        >
+                        {/* 4. Small: Date + City - STATIC */}
+                        <div className="pt-6 border-t border-white/5 w-full max-w-[280px]">
                             <p className="text-[11px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
                                 Thursday, 12 March 2026 <br />
                                 Jagityala, Telangana
                             </p>
-                        </motion.div>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Subtle Scroll Hint - Hides permanently on scroll */}
+            {/* Subtle Scroll Hint */}
             <AnimatePresence>
                 {!hasScrolled && startHero && (
                     <motion.div
@@ -185,7 +143,7 @@ export const Hero = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ delay: 4, duration: 1.5 }}
+                        transition={{ delay: 3, duration: 1.5 }}
                         className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20 cursor-pointer"
                         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                     >
