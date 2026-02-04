@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { MapPin, Calendar, Clock, Map } from "lucide-react";
-import Image from "next/image";
+import { useInViewOnce } from "./useInViewOnce";
 
 interface EventCardProps {
     title: string;
@@ -12,7 +11,6 @@ interface EventCardProps {
     address: string;
     googleMapsUrl?: string;
     icon?: React.ReactNode;
-    isReversed?: boolean;
     accentColor?: "purple" | "marigold";
 }
 
@@ -24,51 +22,45 @@ export const EventCard = ({
     address,
     googleMapsUrl,
     icon,
-    isReversed = false,
     accentColor = "purple",
 }: EventCardProps) => {
+    const { elementRef, isInView } = useInViewOnce({ rootMargin: "-20% 0px", threshold: 0.1 });
     const theme = {
         purple: {
             primary: "text-[#4A235A]",
             bg: "bg-[#4A235A]",
-            border: "border-[#4A235A]/10",
+            border: "border-[#4A235A]/20",
         },
         marigold: {
             primary: "text-[#D4AF37]",
             bg: "bg-[#D4AF37]",
-            border: "border-[#D4AF37]/10",
+            border: "border-[#D4AF37]/20",
         }
     }[accentColor];
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full px-6 mb-20 flex flex-col gap-10 items-center"
+        <div
+            ref={elementRef}
+            className={`w-full flex flex-col items-center transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
         >
-            {/* Visual Anchor */}
-            <div className="relative w-full max-w-[300px]">
-                <div className="relative aspect-[4/5] rounded-t-full border border-gold/40 p-3 bg-white/30 backdrop-blur-sm">
-                    <div className="relative h-full w-full overflow-hidden rounded-t-full bg-[#F7F3E8]">
-                        <div className="absolute inset-0 flex items-center justify-center p-6">
-                            <div className="w-full h-full transition-transform duration-700">
-                                {icon}
-                            </div>
-                        </div>
+            <div className={`w-full max-w-[340px] rounded-[36px] border ${theme.border} bg-white px-6 pb-10 pt-12`}>
+                <div className="flex justify-center">
+                    <div className="relative h-[200px] w-[200px]">
+                        <div className="absolute inset-0 rounded-full border border-gold/30 bg-[#F7F3E8]" />
+                        <div className="absolute inset-0 p-6 relative">{icon}</div>
                     </div>
                 </div>
-            </div>
 
-            {/* Information Hierarchy */}
-            <div className="w-full text-center space-y-8">
-                <div className="space-y-2">
-                    <p className="text-nav-label">Celebration</p>
-                    <h2 className={`text-3xl font-serif ${theme.primary} leading-tight`}>
-                        {title}
-                    </h2>
-                </div>
+                {/* Information Hierarchy */}
+                <div className="mt-8 text-center space-y-8">
+                    <div className="space-y-2">
+                        <p className="text-[10px] uppercase tracking-[0.4em] text-[#4A235A]/50 font-sans font-semibold">
+                            Celebration
+                        </p>
+                        <h2 className={`text-3xl font-serif ${theme.primary} leading-tight`}>
+                            {title}
+                        </h2>
+                    </div>
 
                 <div className="space-y-6">
                     {/* Stacked Info Blocks */}
@@ -91,19 +83,19 @@ export const EventCard = ({
                     </div>
                 </div>
 
-                <div className="pt-4">
-                    <motion.a
-                        href={googleMapsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-3 bg-[#3D2B52] text-white px-8 py-3.5 rounded-full font-serif italic text-lg shadow-lg active:bg-[#4A2B62]"
-                    >
-                        <Map size={18} />
-                        Get Directions
-                    </motion.a>
+                    <div className="pt-4">
+                        <a
+                            href={googleMapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-3 bg-[#3D2B52] text-white px-8 py-3.5 rounded-full font-serif italic text-lg border border-white/10 active:scale-95 transition-transform duration-200"
+                        >
+                            <Map size={18} />
+                            Get Directions
+                        </a>
+                    </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
