@@ -15,10 +15,20 @@ const cormorant = Cormorant_Garamond({
     display: "swap"
 });
 
+// # Wedding Invitation Project Tasks
+//
+// - [x] Final Hero Reset & Polish
+// - [x] Cloudflare Deployment & Subdomain Setup
+// - [ ] Post-Deployment Refinements [IN PROGRESS]
+//     - [ ] Update website metadata (tab title)
+//     - [ ] Refine desktop hero spacing and layout
+//     - [ ] Final PUSH to GitHub
+// - [x] Optimization & Performance
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://wedding-invite.pages.dev"),
     title: "Wedding Invitation | Pruthviraj & Sravani",
-    description: "We are joyfully inviting you to celebrate our wedding union. Sunday, 11th August 2024.",
+    description: "We are joyfully inviting you to celebrate the wedding of Pruthviraj and Sravani. 12th March 2026.",
     openGraph: {
         title: "Wedding Invitation | Pruthviraj & Sravani",
         description: "You're cordially invited to celebrate the wedding of Pruthviraj and Sravani.",
