@@ -40,6 +40,11 @@ export const metadata: Metadata = {
         description: "We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026.",
         images: ["https://akruthi.kpruthvi.com/images/og-image.png"],
     },
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "black-translucent",
+        title: "Wedding: Pruthvi & Akruthi",
+    },
 };
 
 export const viewport: Viewport = {
@@ -48,6 +53,7 @@ export const viewport: Viewport = {
     initialScale: 1,
     maximumScale: 1,
     userScalable: false,
+    viewportFit: 'cover',
 };
 
 export default function RootLayout({

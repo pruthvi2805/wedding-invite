@@ -68,14 +68,14 @@ export const Hero = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
                         className="absolute inset-0 z-50 flex items-center justify-center px-6 text-center"
                     >
                         <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 1 }}
-                            className="text-2xl md:text-3xl font-serif italic text-white/90 leading-relaxed tracking-wide"
+                            transition={{ duration: 0.8 }}
+                            className="text-2xl font-serif italic text-white/90 leading-relaxed tracking-wide"
                         >
                             Two families. Two traditions.<br />One beginning.
                         </motion.p>
@@ -83,10 +83,10 @@ export const Hero = ({
                 )}
             </AnimatePresence>
 
-            {/* Floating Marigold Petals */}
+            {/* Floating Marigold Petals (Optimized) */}
             <PetalAnimation isStarted={startPetals} />
 
-            {/* Content Wrapper - STATIC FADE ONLY */}
+            {/* Content Wrapper - MOBILE ONLY */}
             <AnimatePresence>
                 {startHero && (
                     <motion.div
@@ -94,15 +94,15 @@ export const Hero = ({
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-lg justify-center py-20"
+                        className="relative z-10 flex flex-col items-center text-center px-6 w-full justify-center py-20"
                     >
 
-                        {/* 1. Small Text: You're invited - STATIC */}
+                        {/* 1. Small Text: You're invited */}
                         <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans">
                             You&apos;re invited
                         </span>
 
-                        {/* 2. Huge: Names - STATIC */}
+                        {/* 2. Huge: Names */}
                         <div className="flex flex-col items-center gap-1 mb-6">
                             <h1 className="text-[4.8rem] leading-[0.85] font-serif font-bold text-white tracking-tighter text-shadow-lg">
                                 {groomName}
@@ -119,12 +119,12 @@ export const Hero = ({
                             </h1>
                         </div>
 
-                        {/* 3. Medium: are getting married - STATIC */}
+                        {/* 3. Medium: are getting married */}
                         <p className="text-2xl font-serif italic text-white/80 mb-6">
                             are getting married
                         </p>
 
-                        {/* 4. Small: Date + City - STATIC */}
+                        {/* 4. Small: Date + City */}
                         <div className="pt-6 border-t border-white/5 w-full max-w-[280px]">
                             <p className="text-[11px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
                                 Thursday, 12 March 2026 <br />
@@ -143,9 +143,8 @@ export const Hero = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ delay: 3, duration: 1.5 }}
-                        className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20 cursor-pointer"
-                        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+                        transition={{ delay: 2, duration: 1 }}
+                        className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20"
                     >
                         <span className="text-[9px] uppercase tracking-[0.6em] font-sans">Scroll</span>
                         <ChevronDown size={14} strokeWidth={1} className="animate-bounce" />

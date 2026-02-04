@@ -44,16 +44,16 @@ export const EventCard = ({
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className={`max-w-6xl mx-auto px-6 mb-24 md:mb-32 flex flex-col ${isReversed ? "md:flex-row-reverse" : "md:flex-row"} gap-12 md:gap-20 items-center`}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full px-6 mb-20 flex flex-col gap-10 items-center"
         >
             {/* Visual Anchor */}
-            <div className="relative flex-1 group w-full max-w-sm">
-                <div className="relative aspect-[4/5] rounded-t-full border-[1px] border-gold/40 shadow-2xl p-4 bg-white/50 backdrop-blur-sm">
-                    <div className="relative h-full w-full overflow-hidden rounded-t-full bg-cream-dark">
-                        <div className="absolute inset-0 flex items-center justify-center p-8">
-                            <div className={`w-full h-full transition-transform duration-1000 group-hover:scale-105`}>
+            <div className="relative w-full max-w-[300px]">
+                <div className="relative aspect-[4/5] rounded-t-full border border-gold/40 p-3 bg-white/30 backdrop-blur-sm">
+                    <div className="relative h-full w-full overflow-hidden rounded-t-full bg-[#F7F3E8]">
+                        <div className="absolute inset-0 flex items-center justify-center p-6">
+                            <div className="w-full h-full transition-transform duration-700">
                                 {icon}
                             </div>
                         </div>
@@ -62,44 +62,45 @@ export const EventCard = ({
             </div>
 
             {/* Information Hierarchy */}
-            <div className="flex-1 text-center md:text-left space-y-10">
-                <div className="space-y-3">
+            <div className="w-full text-center space-y-8">
+                <div className="space-y-2">
                     <p className="text-nav-label">Celebration</p>
-                    <h2 className={`text-section-title ${theme.primary} leading-tight`}>
+                    <h2 className={`text-3xl font-serif ${theme.primary} leading-tight`}>
                         {title}
                     </h2>
                 </div>
 
                 <div className="space-y-6">
                     {/* Stacked Info Blocks */}
-                    <div className="flex items-center justify-center md:justify-start gap-4">
-                        <Calendar className="text-gold" size={20} />
-                        <p className="text-xl md:text-2xl font-serif text-charcoal">{date}</p>
+                    <div className="flex items-center justify-center gap-4">
+                        <Calendar className="text-gold" size={18} />
+                        <p className="text-xl font-serif text-charcoal">{date}</p>
                     </div>
 
-                    <div className="flex items-center justify-center md:justify-start gap-4">
-                        <Clock className="text-gold" size={20} />
-                        <p className="text-body-warm text-charcoal/80 uppercase tracking-widest">{time}</p>
+                    <div className="flex items-center justify-center gap-4">
+                        <Clock className="text-gold" size={18} />
+                        <p className="text-sm font-sans uppercase tracking-[0.2em] text-charcoal/70">{time}</p>
                     </div>
 
-                    <div className="flex items-center justify-center md:justify-start gap-4 items-start">
-                        <MapPin className="text-gold mt-1 shrink-0" size={20} />
-                        <div className="space-y-1">
-                            <p className="text-xl md:text-2xl font-serif text-charcoal">{venueName}</p>
-                            <p className="text-body-warm text-charcoal/60 leading-relaxed max-w-xs">{address}</p>
+                    <div className="flex items-center justify-center gap-4 items-start">
+                        <MapPin className="text-gold mt-1 shrink-0" size={18} />
+                        <div className="space-y-0.5">
+                            <p className="text-xl font-serif text-charcoal">{venueName}</p>
+                            <p className="text-sm font-sans text-charcoal/50 leading-relaxed px-4">{address}</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="pt-6">
+                <div className="pt-4">
                     <motion.a
                         href={googleMapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover-scale-tap inline-flex items-center gap-3 bg-[#3D2B52] text-white px-8 py-4 rounded-full font-serif italic text-lg shadow-xl"
+                        whileTap={{ scale: 0.95 }}
+                        className="inline-flex items-center gap-3 bg-[#3D2B52] text-white px-8 py-3.5 rounded-full font-serif italic text-lg shadow-lg active:bg-[#4A2B62]"
                     >
-                        <Map size={20} />
-                        Open in Maps
+                        <Map size={18} />
+                        Get Directions
                     </motion.a>
                 </div>
             </div>
