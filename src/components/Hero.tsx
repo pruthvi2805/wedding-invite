@@ -27,7 +27,7 @@ export const Hero = ({
 
     // Delay petals until after text fades in
     useEffect(() => {
-        const timer = setTimeout(() => setStartPetals(true), 1500);
+        const timer = setTimeout(() => setStartPetals(true), 4000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -48,7 +48,7 @@ export const Hero = ({
                 <motion.span
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 0.6, y: 0 }}
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
                     className="text-xs font-sans tracking-[0.4em] uppercase text-gold mb-4"
                 >
                     You&apos;re invited
@@ -59,7 +59,7 @@ export const Hero = ({
                     <motion.h1
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.5, delay: 0.3 }}
+                        transition={{ duration: 1.5, delay: 1.0 }}
                         className="text-[4.5rem] leading-[0.9] font-serif font-bold text-white tracking-tight text-shadow-lg"
                     >
                         {groomName}
@@ -68,7 +68,7 @@ export const Hero = ({
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 1 }}
+                        transition={{ duration: 1, delay: 1.5 }}
                     >
                         <span className="text-3xl font-serif text-[#D4AF37] italic">
                             &
@@ -78,7 +78,7 @@ export const Hero = ({
                     <motion.h1
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.5, delay: 0.6 }}
+                        transition={{ duration: 1.5, delay: 2.0 }}
                         className="text-[4.5rem] leading-[0.9] font-serif font-bold text-white tracking-tight text-shadow-lg"
                     >
                         {brideName}
@@ -89,7 +89,7 @@ export const Hero = ({
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.9 }}
-                    transition={{ delay: 1.5, duration: 1 }}
+                    transition={{ delay: 2.5, duration: 1 }}
                     className="text-2xl font-serif italic text-white/90 mb-4"
                 >
                     are getting married
@@ -99,7 +99,7 @@ export const Hero = ({
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.7 }}
-                    transition={{ delay: 2, duration: 1 }}
+                    transition={{ delay: 3.0, duration: 1 }}
                     className="pt-4 border-t border-white/10"
                 >
                     <p className="text-sm font-sans tracking-widest text-white/80">

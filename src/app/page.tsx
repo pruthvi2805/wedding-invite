@@ -28,37 +28,52 @@ export default function Home() {
             {/* Transitional Flow */}
             <div className="relative bg-[#FDFBF2] py-24 md:py-32 space-y-32">
 
-                {/* Warmer Family Section */}
-                <section className="max-w-4xl mx-auto px-6 text-center space-y-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="space-y-6"
-                    >
-                        <span className="text-nav-label block">With blessings from</span>
+                {/* Warmer Family Section - Separate Chapter */}
+                <section className="relative overflow-hidden">
+                    {/* Chapter Background */}
+                    <div className="absolute inset-0 bg-[#FAF7F0] opacity-50" />
 
-                        <div className="grid md:grid-cols-2 gap-12 md:gap-4 items-start pt-4">
-                            <div className="space-y-2">
-                                <p className="text-xl md:text-2xl font-serif text-charcoal">{groom.parents}</p>
-                                <p className="text-xs uppercase tracking-widest text-gold/60 italic">Groom&apos;s Family</p>
+                    <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-center space-y-12">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="space-y-8"
+                        >
+                            <span className="text-[10px] uppercase tracking-[0.5em] text-[#3D2B52]/40 block font-sans">
+                                With blessings from
+                            </span>
+
+                            <div className="grid md:grid-cols-2 gap-12 md:gap-4 items-start pt-4">
+                                <div className="space-y-3">
+                                    <p className="text-2xl md:text-3xl font-serif text-[#3D2B52] font-medium leading-tight">
+                                        {groom.parents}
+                                    </p>
+                                    <p className="text-[10px] uppercase tracking-[0.3em] text-gold font-sans font-semibold">
+                                        Groom&apos;s Family
+                                    </p>
+                                </div>
+
+                                <div className="hidden md:flex items-center justify-center opacity-20">
+                                    <div className="h-12 w-[1px] bg-[#3D2B52]" />
+                                </div>
+
+                                <div className="space-y-3">
+                                    <p className="text-2xl md:text-3xl font-serif text-[#3D2B52] font-medium leading-tight">
+                                        {bride.parents}
+                                    </p>
+                                    <p className="text-[10px] uppercase tracking-[0.3em] text-gold font-sans font-semibold">
+                                        Bride&apos;s Family
+                                    </p>
+                                </div>
                             </div>
+                        </motion.div>
 
-                            <div className="hidden md:flex items-center justify-center opacity-20">
-                                <div className="h-12 w-[1px] bg-gold" />
-                            </div>
-
-                            <div className="space-y-2">
-                                <p className="text-xl md:text-2xl font-serif text-charcoal">{bride.parents}</p>
-                                <p className="text-xs uppercase tracking-widest text-gold/60 italic">Bride&apos;s Family</p>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Subtle Separator */}
-                    <div className="flex justify-center opacity-20 pt-10">
-                        <div className="w-16 h-16 border-2 border-gold rounded-full flex items-center justify-center rotate-45">
-                            <div className="w-8 h-8 border border-gold" />
+                        {/* Symbolic Divider */}
+                        <div className="flex justify-center pt-8">
+                            <div className="w-10 h-[1px] bg-gold/30" />
+                            <div className="mx-4 w-2 h-2 rounded-full border border-gold rotate-45" />
+                            <div className="w-10 h-[1px] bg-gold/30" />
                         </div>
                     </div>
                 </section>
