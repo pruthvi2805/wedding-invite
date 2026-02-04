@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 interface Petal {
     id: number;
@@ -35,7 +35,7 @@ export const PetalAnimation = ({ isStarted = true }: { isStarted?: boolean }) =>
             {petals.map((petal) => (
                 <div
                     key={petal.id}
-                    className="absolute animate-petal"
+                    className="absolute animate-petal will-change-transform"
                     style={{
                         left: `${petal.left}%`,
                         width: `${petal.size}px`,
@@ -43,7 +43,8 @@ export const PetalAnimation = ({ isStarted = true }: { isStarted?: boolean }) =>
                         animationDelay: `${petal.delay}s`,
                         animationDuration: `${petal.duration}s`,
                         opacity: 0,
-                    }}
+                        "--petal-rotate": `${petal.rotation}deg`,
+                    } as CSSProperties}
                 >
                     <svg
                         viewBox="0 0 100 100"
