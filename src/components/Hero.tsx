@@ -26,12 +26,12 @@ export const Hero = ({
         });
     }, [scrollY]);
 
-    // Sequencing: Fluid Unfolding
+    // Sequencing: Intro -> Hero -> Petals
     useEffect(() => {
         // Hero starts emerging while intro is still fading
         const heroTimer = setTimeout(() => setStartHero(true), 1800);
-        // Petals start drifting as the names begin to unfold
-        const petalTimer = setTimeout(() => setStartPetals(true), 3000);
+        // Petals start drifting earlier, syncing with the name reveal
+        const petalTimer = setTimeout(() => setStartPetals(true), 2200);
         return () => {
             clearTimeout(heroTimer);
             clearTimeout(petalTimer);
@@ -43,7 +43,7 @@ export const Hero = ({
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: { duration: 2, ease: "easeOut" }
+            transition: { duration: 2.2, ease: "easeOut" }
         }
     };
 
@@ -59,7 +59,7 @@ export const Hero = ({
             scale: 1,
             transition: {
                 delay,
-                duration: 1.5,
+                duration: 2.2, // Slower, more relaxed pacing
                 ease: [0.22, 1, 0.36, 1] // Organic easeOutQuint
             }
         })
