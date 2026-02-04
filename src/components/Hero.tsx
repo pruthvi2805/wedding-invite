@@ -37,8 +37,8 @@ export const Hero = ({
     }, []);
 
     useEffect(() => {
-        const heroTimer = setTimeout(() => setStartHero(true), 300);
-        const petalTimer = setTimeout(() => setStartPetals(true), 1600);
+        const heroTimer = setTimeout(() => setStartHero(true), 100);
+        const petalTimer = setTimeout(() => setStartPetals(true), 800);
         return () => {
             clearTimeout(heroTimer);
             clearTimeout(petalTimer);
@@ -47,34 +47,16 @@ export const Hero = ({
 
     useEffect(() => {
         if (!startHero) return;
-        const hintTimer = setTimeout(() => setShowScrollHint(false), 3000);
+        const hintTimer = setTimeout(() => setShowScrollHint(false), 5000);
         return () => clearTimeout(hintTimer);
-    }, [startHero]);
-
-    useEffect(() => {
-        if (!startHero) return;
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (prefersReducedMotion) return;
-
-        const downTimer = setTimeout(() => {
-            window.scrollTo({ top: 50, behavior: "smooth" });
-        }, 1400);
-        const upTimer = setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }, 2100);
-
-        return () => {
-            clearTimeout(downTimer);
-            clearTimeout(upTimer);
-        };
     }, [startHero]);
 
     return (
         <section
             ref={heroRef}
-            className="h-[100svh] min-h-[100svh] w-full bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center flex-none pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+            className="h-screen min-h-[100dvh] w-full bg-[#3D2B52] relative overflow-hidden flex flex-col items-center justify-center flex-none"
         >
-            <div className="absolute inset-0 z-0 bg-[#3D2B52] animate-hero-bg opacity-0" />
+            <div className="absolute inset-0 z-0 bg-[#3D2B52] animate-hero-bg opacity-100" />
 
             <PetalAnimation isStarted={startPetals} />
 
@@ -121,11 +103,14 @@ export const Hero = ({
             </div>
 
             {!hasScrolled && startHero && showScrollHint && (
-                <div className="absolute bottom-10 flex flex-col items-center gap-1 text-white/20 z-30 animate-hero-fade" style={{ animationDelay: "1.6s" }}>
+                <div className="absolute bottom-12 flex flex-col items-center gap-1 text-white/20 z-30 animate-hero-fade" style={{ animationDelay: "1.6s" }}>
                     <span className="text-[8px] uppercase tracking-[0.6em] font-sans">Reveal Invitation</span>
                     <ChevronDown size={12} strokeWidth={1} className="animate-bounce" />
                 </div>
             )}
+
+            {/* Transition Gradient */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F7F3E8] to-transparent z-20" />
         </section>
     );
 };

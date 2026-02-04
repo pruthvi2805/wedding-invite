@@ -40,8 +40,7 @@ export default function Home() {
                 brideName={bride.name}
             />
 
-            <div className="relative bg-[#F7F3E8] z-10 w-full -mt-20 pt-20">
-                <div className="absolute -top-20 left-0 right-0 h-20 bg-gradient-to-b from-[#3D2B52] to-[#F7F3E8] pointer-events-none" />
+            <div className="relative bg-[#F7F3E8] z-10 w-full">
                 {/* Warmer Family Section */}
                 <section className="relative px-6 pt-10 text-center space-y-8">
                     <div className="space-y-6">
