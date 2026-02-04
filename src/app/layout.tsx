@@ -41,6 +41,20 @@ export default function RootLayout({
             <head>
                 <title>Wedding Invitation | Pruthvi & Akruthi</title>
                 <meta name="description" content="We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026." />
+
+                {/* Open Graph / Facebook / WhatsApp */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://akruthi.kpruthvi.com" />
+                <meta property="og:title" content="Wedding Invitation | Pruthvi & Akruthi" />
+                <meta property="og:description" content="We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026." />
+                <meta property="og:image" content="https://akruthi.kpruthvi.com/images/og-image.png" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://akruthi.kpruthvi.com" />
+                <meta property="twitter:title" content="Wedding Invitation | Pruthvi & Akruthi" />
+                <meta property="twitter:description" content="We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026." />
+                <meta property="twitter:image" content="https://akruthi.kpruthvi.com/images/og-image.png" />
             </head>
             <body className="bg-[#3D2B52] text-charcoal antialiased">
                 {isDesktop ? (
