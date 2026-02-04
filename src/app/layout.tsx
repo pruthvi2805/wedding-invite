@@ -1,6 +1,10 @@
+"use client";
+
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import { useEffect, useState } from "react";
+import { Smartphone } from "lucide-react";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -15,44 +19,55 @@ const cormorant = Cormorant_Garamond({
     display: "swap"
 });
 
-export const metadata: Metadata = {
-    metadataBase: new URL("https://wedding-invite.pages.dev"),
-    title: "Wedding Invitation | Pruthvi & Akruthi",
-    description: "We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026.",
-    openGraph: {
-        title: "Wedding Invitation | Pruthvi & Akruthi",
-        description: "You're cordially invited to celebrate the wedding of Pruthvi and Akruthi.",
-        url: "https://wedding-invite.pages.dev",
-        siteName: "Pruthvi & Akruthi Wedding",
-        images: [
-            {
-                url: "/og-image.jpg",
-                width: 1200,
-                height: 630,
-                alt: "Wedding Invitation",
-            },
-        ],
-        locale: "en_IN",
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Wedding Invitation | Pruthvi & Akruthi",
-        description: "You're cordially invited to celebrate the wedding of Pruthvi and Akruthi.",
-        images: ["/og-image.jpg"],
-    },
-};
-
 export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const checkDevice = () => {
+            setIsDesktop(window.innerWidth > 768);
+        };
+
+        checkDevice();
+        window.addEventListener('resize', checkDevice);
+        return () => window.removeEventListener('resize', checkDevice);
+    }, []);
+
     return (
         <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+            <head>
+                <title>Wedding Invitation | Pruthvi & Akruthi</title>
+                <meta name="description" content="We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026." />
+            </head>
             <body className="bg-[#3D2B52] text-charcoal antialiased">
-                {children}
+                {isDesktop ? (
+                    <div className="fixed inset-0 z-[100] bg-[#3D2B52] flex flex-col items-center justify-center p-10 text-center">
+                        <div className="max-w-md space-y-8 animate-in fade-in zoom-in duration-700">
+                            <div className="flex justify-center text-[#D4AF37]">
+                                <Smartphone size={64} strokeWidth={1} />
+                            </div>
+                            <h1 className="text-4xl md:text-5xl font-serif text-white leading-tight">
+                                Designed for your mobile experience
+                            </h1>
+                            <p className="text-[#D4AF37]/80 text-xl font-serif italic">
+                                This invitation is a mobile-first journey. Please open this link on your phone to experience the ceremony.
+                            </p>
+                            <div className="pt-10 border-t border-white/10 text-white/40 text-sm tracking-widest uppercase">
+                                Pruthvi & Akruthi
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    children
+                )}
             </body>
         </html>
     );
 }
+
+// Since we're using Client Components for the desktop check,
+// we'll keep the actual static metadata in a separate export if needed,
+// but for static export, this works well.
