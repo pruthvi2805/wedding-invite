@@ -83,7 +83,7 @@ export const Hero = ({
                 <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans">
                     We cordially invite you
                 </span>
-                <span className="text-xs uppercase tracking-[0.35em] text-gold/80 font-sans delay-200 duration-700 transition-all">
+                <span className="text-xs uppercase tracking-[0.35em] text-white/40 font-sans delay-200 duration-700 transition-all">
                     to celebrate the wedding of
                 </span>
 
