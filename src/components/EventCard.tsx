@@ -41,26 +41,28 @@ export const EventCard = ({
     return (
         <div
             ref={elementRef}
-            className={`w-full flex flex-col items-center transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+            className={`w-full flex flex-col items-center transition-transform duration-700 ease-out ${isInView ? "translate-y-0" : "translate-y-12"}`}
         >
             <div className={`w-full max-w-[340px] rounded-[36px] border ${theme.border} bg-white px-6 pb-10 pt-12`}>
-                <div className="flex justify-center">
-                    <div className="relative h-44 w-44 overflow-hidden rounded-full border border-gold/30 bg-[#F7F3E8] shadow-inner">
-                        <div className="absolute inset-0 p-3">{icon}</div>
+                {/* Title Section - Now at Top */}
+                <div className="text-center space-y-2 mb-8">
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-[#4A235A]/50 font-sans font-semibold">
+                        Join us for
+                    </p>
+                    <h2 className={`text-4xl font-serif ${theme.primary} leading-tight`}>
+                        {title}
+                    </h2>
+                </div>
+
+                {/* Image Section - Middle */}
+                <div className="flex justify-center mb-8">
+                    <div className="relative h-56 w-56 overflow-hidden">
+                        <div className="absolute inset-0">{icon}</div>
                     </div>
                 </div>
 
                 {/* Information Hierarchy */}
-                <div className="mt-8 text-center space-y-8">
-                    <div className="space-y-2">
-                        <p className="text-[10px] uppercase tracking-[0.4em] text-[#4A235A]/50 font-sans font-semibold">
-                            Celebration
-                        </p>
-                        <h2 className={`text-3xl font-serif ${theme.primary} leading-tight`}>
-                            {title}
-                        </h2>
-                    </div>
-
+                <div className="text-center space-y-8">
                     <div className="space-y-6">
                         {/* Stacked Info Blocks */}
                         <div className="flex items-center justify-center gap-4">

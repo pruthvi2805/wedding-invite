@@ -14,7 +14,7 @@ export default function Home() {
     const { elementRef: footerRef, isInView: footerInView } = useInViewOnce({ rootMargin: "-30% 0px", threshold: 0.2 });
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 800);
+        const timer = setTimeout(() => setIsLoading(false), 3500);
         return () => clearTimeout(timer);
     }, []);
 
@@ -24,11 +24,13 @@ export default function Home() {
     return (
         <main className="text-charcoal selection:bg-marigold selection:text-white overflow-x-hidden min-h-screen bg-[#3D2B52]">
             {isLoading && (
-                <div className="fixed inset-0 z-[100] bg-[#3D2B52] flex items-center justify-center p-10 animate-fade-out">
+                <div
+                    className="fixed inset-0 z-[100] bg-[#3D2B52] flex items-center justify-center p-10 animate-fade-out pointer-events-none"
+                    style={{ animationDuration: "1.5s", animationDelay: "2s", animationFillMode: "forwards" }}
+                >
                     <div className="space-y-4 text-center">
-                        <div className="mx-auto h-12 w-12 rounded-full border border-gold/50 border-t-transparent animate-spin-slow" />
-                        <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 font-sans">
-                            Loading Ceremony
+                        <p className="text-xl md:text-2xl font-serif text-gold/90 italic leading-relaxed animate-pulse-subtle">
+                            {weddingDetails.tagline}
                         </p>
                     </div>
                 </div>
@@ -130,14 +132,13 @@ export default function Home() {
                         }
                     />
                 </div>
-                <div className="absolute -bottom-20 left-0 right-0 h-20 bg-gradient-to-b from-[#F7F3E8] to-[#3D2B52] pointer-events-none" />
             </div>
 
             {/* Footer / RSVP / Share */}
             <footer className="relative bg-[#3D2B52] text-[#FFFDF5] pt-24 pb-28 px-6 text-center overflow-hidden">
                 <div
                     ref={footerRef}
-                    className={`relative z-10 space-y-10 transition-all duration-700 ease-out ${footerInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                    className={`relative z-10 space-y-10`}
                 >
                     <div className="flex justify-center text-gold mb-4">
                         <Heart size={44} strokeWidth={1} />
