@@ -181,8 +181,8 @@ export default function Home() {
                     </div>
 
                     <div className="pt-16 border-t border-cream/10">
-                        <p className="text-[10px] uppercase tracking-[0.2em] opacity-40">
-                            {groom.name} & {bride.name}
+                        <p className="text-xl font-serif italic text-gold/60 tracking-wide">
+                            Until we see you there
                         </p>
                     </div>
                 </div>
