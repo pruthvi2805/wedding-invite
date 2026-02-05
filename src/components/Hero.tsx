@@ -48,10 +48,17 @@ export const Hero = ({
     }, [startDelay]);
 
     useEffect(() => {
-        if (!startHero) return;
-        const hintTimer = setTimeout(() => setShowScrollHint(false), 5000);
-        return () => clearTimeout(hintTimer);
-    }, [startHero]);
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setShowScrollHint(false);
+            } else {
+                setShowScrollHint(true);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
         <section
@@ -102,9 +109,17 @@ export const Hero = ({
                 </div>
             </div>
 
-
-
-            {/* Transition Gradient */}
+            {/* Scroll Indicator */}
+            <div
+                className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-500 ${showScrollHint ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+            >
+                <div className="flex flex-col items-center gap-2 animate-bounce">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-sans">
+                        Scroll
+                    </span>
+                    <ChevronDown className="text-gold/60" size={20} />
+                </div>
+            </div>
         </section>
     );
 };

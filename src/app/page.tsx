@@ -100,7 +100,7 @@ export default function Home() {
                         venueName={events.wedding.venue}
                         address={events.wedding.address}
                         googleMapsUrl={events.wedding.googleMapsUrl}
-                        accentColor="purple"
+                        accentColor="marigold"
                         icon={
                             <Image
                                 src="/images/wedding-caricature.jpg"
