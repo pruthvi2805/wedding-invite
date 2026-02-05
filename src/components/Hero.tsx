@@ -64,12 +64,7 @@ export const Hero = ({
             <GoldDust />
 
             <div className={`relative z-10 flex flex-col items-center text-center px-6 w-full justify-center transition-opacity duration-1000 ${startHero ? "opacity-100" : "opacity-0"}`}>
-                {/* Auspicious Invocation */}
-                <div className="mb-6 opacity-90 animate-fade-in delay-300">
-                    <p className="text-[#D4AF37] font-serif italic text-xl md:text-2xl tracking-wide">
-                        || Shree Ganeshay Namah ||
-                    </p>
-                </div>
+
 
                 <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans">
                     We cordially invite you
