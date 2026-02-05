@@ -21,7 +21,6 @@ export default function Home() {
     }, []);
 
     const { groom, bride, rsvp, events } = weddingDetails;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(rsvp.message + " " + (typeof window !== 'undefined' ? window.location.href : ""))}`;
 
     return (
         <main className="text-charcoal selection:bg-marigold selection:text-white overflow-x-hidden min-h-screen bg-[#3D2B52]">
@@ -159,20 +158,27 @@ export default function Home() {
                     <div className="flex flex-col items-center justify-center gap-6 pt-6">
                         <button
                             onClick={async () => {
+                                const currentUrl = typeof window !== 'undefined' ? window.location.href : "https://akruthi.kpruthvi.com";
                                 const shareData = {
                                     title: "Wedding Invitation | Pruthvi & Akruthi",
-                                    text: rsvp.message,
-                                    url: "https://akruthi.kpruthvi.com"
+                                    text: rsvp.message + currentUrl,
+                                    url: currentUrl
                                 };
 
                                 try {
                                     if (navigator.share) {
-                                        await navigator.share(shareData);
+                                        // Some platforms/apps (like WhatsApp on iOS) ignore 'text' if 'url' is present.
+                                        // Combining them in 'text' is the most reliable way to ensure the message is sent.
+                                        await navigator.share({
+                                            title: shareData.title,
+                                            text: shareData.text
+                                            // Leaving 'url' out here so apps like WhatsApp prioritize the 'text' content
+                                        });
                                     } else {
-                                        window.open(whatsappUrl, '_blank');
+                                        window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text)}`, '_blank');
                                     }
                                 } catch (err) {
-                                    window.open(whatsappUrl, '_blank');
+                                    window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text)}`, '_blank');
                                 }
                             }}
                             className="bg-[#FAF7F0] text-[#3D2B52] px-8 py-3.5 rounded-full font-serif font-medium flex items-center gap-3 border border-white/20 active:scale-95 transition-transform duration-200"
