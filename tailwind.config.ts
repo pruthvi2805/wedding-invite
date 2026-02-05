@@ -44,6 +44,16 @@ const config: Config = {
             backgroundImage: {
                 'pattern-marigold': "url('/assets/images/pattern-marigold.svg')",
             },
+            animation: {
+                'bounce-slow': 'bounce 3s infinite',
+                'scroll-bounce': 'scroll-bounce 2s ease-in-out infinite',
+            },
+            keyframes: {
+                'scroll-bounce': {
+                    '0%, 100%': { transform: 'translateY(0)', opacity: '0.4' },
+                    '50%': { transform: 'translateY(-14px)', opacity: '1' },
+                }
+            }
         },
     },
     plugins: [],

@@ -15,7 +15,8 @@ export default function Home() {
     const { elementRef: footerRef, isInView: footerInView } = useInViewOnce({ rootMargin: "-30% 0px", threshold: 0.2 });
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 3500);
+        // Reduced timeout: 2s stay + 2s fade out = 4s total
+        const timer = setTimeout(() => setIsLoading(false), 4000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -24,23 +25,24 @@ export default function Home() {
 
     return (
         <main className="text-charcoal selection:bg-marigold selection:text-white overflow-x-hidden min-h-screen bg-[#3D2B52]">
-            {isLoading && (
-                <div
-                    className="fixed inset-0 z-[100] bg-[#3D2B52] flex items-center justify-center p-10 animate-fade-out pointer-events-none"
-                    style={{ animationDuration: "1.5s", animationDelay: "2s", animationFillMode: "forwards" }}
-                >
-                    <div className="space-y-4 text-center">
-                        <p className="text-xl md:text-2xl font-serif text-gold/90 italic leading-relaxed animate-pulse-subtle">
-                            {weddingDetails.tagline}
-                        </p>
-                    </div>
+            <div
+                className="fixed inset-0 z-[100] bg-[#3D2B52] flex items-center justify-center p-10 animate-fade-out pointer-events-none"
+                // Shortened stay (2s delay) and fade out (2s duration)
+                style={{ animationDuration: "2s", animationDelay: "2s", animationFillMode: "forwards" }}
+            >
+                <div className="space-y-4 text-center">
+                    <p className="text-xl md:text-2xl font-serif text-gold/90 italic leading-relaxed animate-fade-in">
+                        {weddingDetails.tagline}
+                    </p>
                 </div>
-            )}
+            </div>
 
             {/* Hero Section - The guided entry starts here */}
+            {/* Adjusted startDelay to 3s to match the faster welcome sequence */}
             <Hero
                 groomName={groom.name}
                 brideName={bride.name}
+                startDelay={3000}
             />
 
             <div className="relative bg-[#F7F3E8] z-10 w-full">

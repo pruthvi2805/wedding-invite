@@ -19,7 +19,14 @@ export const Hero = ({
     const [startHero, setStartHero] = useState(false);
     const [startPetals, setStartPetals] = useState(false);
     const [showScrollHint, setShowScrollHint] = useState(true);
+    const [isIndicatorLoaded, setIsIndicatorLoaded] = useState(false);
     const heroRef = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        // Show indicator after names and date have appeared (startDelay + ~2.5s)
+        const timer = setTimeout(() => setIsIndicatorLoaded(true), startDelay + 2500);
+        return () => clearTimeout(timer);
+    }, [startDelay]);
 
     useEffect(() => {
         const target = heroRef.current;
@@ -111,9 +118,9 @@ export const Hero = ({
 
             {/* Scroll Indicator */}
             <div
-                className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-500 ${showScrollHint ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+                className={`absolute bottom-16 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-1000 ${showScrollHint && isIndicatorLoaded ? "opacity-100" : "opacity-0 pointer-events-none"}`}
             >
-                <div className="flex flex-col items-center gap-2 animate-bounce">
+                <div className="flex flex-col items-center gap-2 animate-scroll-bounce">
                     <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-sans">
                         Scroll
                     </span>
