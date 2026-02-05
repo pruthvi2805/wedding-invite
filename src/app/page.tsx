@@ -102,10 +102,10 @@ export default function Home() {
                         accentColor="purple"
                         icon={
                             <Image
-                                src="/images/wedding-couple-clean.png"
+                                src="/images/wedding-caricature.jpg"
                                 alt="Wedding"
                                 fill
-                                className="object-contain"
+                                className="object-contain p-2"
                                 sizes="240px"
                                 loading="lazy"
                             />
@@ -125,7 +125,7 @@ export default function Home() {
                                 src="/images/reception-couple-clean.png"
                                 alt="Reception"
                                 fill
-                                className="object-contain"
+                                className="object-contain p-2"
                                 sizes="240px"
                                 loading="lazy"
                             />

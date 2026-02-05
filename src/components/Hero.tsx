@@ -94,7 +94,7 @@ export const Hero = ({
                 <div className="pt-6 border-t border-white/5 w-full max-w-[220px] delay-700 duration-700 transition-opacity">
                     <p className="text-[10px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
                         Thursday, 12 March 2026 <br />
-                        Jagityala, Telangana
+                        Jagtial, Telangana
                     </p>
                 </div>
             </div>

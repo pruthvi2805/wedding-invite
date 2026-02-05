@@ -17,9 +17,9 @@ export const weddingDetails = {
             date: "Thursday, 12th March 2026",
             time: "11:00 AM onwards",
             venue: "Virupakshi Gardens",
-            address: "Jagityala, Telangana",
+            address: "Jagtial, Telangana",
             coordinates: {
-                lat: 18.7833, // Approximate for Jagityala, likely unused if generic link works
+                lat: 18.7833, // Approximate for Jagtial, likely unused if generic link works
                 lng: 78.9167
             },
             googleMapsUrl: "https://maps.app.goo.gl/aW8U2udjqeU96qGs8"

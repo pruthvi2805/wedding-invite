@@ -57,7 +57,7 @@ export const EventCard = ({
                 {/* Image Section - Middle */}
                 <div className="flex justify-center mb-8">
                     <div className="relative h-56 w-56 overflow-hidden rounded-full border-[6px] border-[#D4AF37]/20 shadow-sm">
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+                        <div className="absolute inset-0 flex items-center justify-center bg-white">
                             {icon}
                         </div>
                     </div>
