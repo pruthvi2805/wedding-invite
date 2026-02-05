@@ -46,6 +46,9 @@ export const metadata: Metadata = {
         statusBarStyle: "black-translucent",
         title: "Wedding: Pruthvi & Akruthi",
     },
+    other: {
+        "og:logo": "https://akruthi.kpruthvi.com/images/wedding-caricature.jpg",
+    },
 };
 
 export const viewport: Viewport = {
