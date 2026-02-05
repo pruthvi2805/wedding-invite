@@ -1,36 +1,58 @@
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageDraw
 import os
 
-def create_padded_og_image(source_path, output_path):
+def create_circular_og_image(source_path, output_path):
     target_w = 1200
     target_h = 630
-    bg_color = (61, 43, 82) # #3D2B52 in RGB
+    bg_color = (255, 255, 255) # White as requested
+    gold_color = (212, 175, 55) # #D4AF37
+    
+    # Framing specs from user config
+    frame_size = 540
+    border_width = 8
 
     with Image.open(source_path) as img:
-        # Convert to RGBA if needed (though it's a jpg)
         img = img.convert("RGBA")
         
-        # Create the canvas
+        # Scale the caricature to fit inside the frame
+        # We'll make it 540x540
+        img_resized = img.resize((frame_size, frame_size), Image.Resampling.LANCZOS)
+        
+        # Create a circular mask
+        mask = Image.new("L", (frame_size, frame_size), 0)
+        draw = ImageDraw.Draw(mask)
+        draw.ellipse((0, 0, frame_size, frame_size), fill=255)
+        
+        # Apply mask to image
+        img_circular = Image.new("RGBA", (frame_size, frame_size), (0, 0, 0, 0))
+        img_circular.paste(img_resized, (0, 0), mask)
+        
+        # Create final canvas
         canvas = Image.new("RGB", (target_w, target_h), bg_color)
         
-        # Calculate scaling for the caricature
-        # We want it to fit nicely within the 630 height. 
-        # Let's leave a small margin, say 5% on top/bottom.
-        margin = 20
-        available_h = target_h - (margin * 2)
+        # Draw the gold border circle on canvas first
+        draw_canvas = ImageDraw.Draw(canvas)
+        # Center coordinates
+        center_x = target_w // 2
+        center_y = target_h // 2
         
-        # Scale the square image to available_h
-        img_resized = img.resize((available_h, available_h), Image.Resampling.LANCZOS)
+        # Bounding box for the gold circle (slightly larger than frame_size to account for border)
+        half_f = frame_size // 2
+        left = center_x - half_f - (border_width // 2)
+        top = center_y - half_f - (border_width // 2)
+        right = center_x + half_f + (border_width // 2)
+        bottom = center_y + half_f + (border_width // 2)
         
-        # Position in the center
-        offset_x = (target_w - available_h) // 2
-        offset_y = margin
+        # Draw thick gold border
+        draw_canvas.ellipse((left, top, right, bottom), outline=gold_color, width=border_width)
         
-        # Paste onto canvas
-        canvas.paste(img_resized, (offset_x, offset_y), img_resized)
+        # Paste the circular image in the center
+        paste_x = center_x - half_f
+        paste_y = center_y - half_f
+        canvas.paste(img_circular, (paste_x, paste_y), img_circular)
         
         # Save as JPEG
-        canvas.save(output_path, "JPEG", quality=90, optimize=True)
+        canvas.save(output_path, "JPEG", quality=95, optimize=True)
         
         file_size = os.path.getsize(output_path) / 1024
         print(f"Image saved to {output_path}")
@@ -40,4 +62,4 @@ def create_padded_og_image(source_path, output_path):
 if __name__ == "__main__":
     source = "public/images/wedding-caricature.jpg"
     output = "public/images/og-image.jpg"
-    create_padded_og_image(source, output)
+    create_circular_og_image(source, output)
