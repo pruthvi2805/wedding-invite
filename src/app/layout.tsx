@@ -24,11 +24,13 @@ export const metadata: Metadata = {
         url: "https://akruthi.kpruthvi.com",
         title: "Wedding Invitation | Pruthvi & Akruthi",
         description: "We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026.",
+        siteName: "Akruthi & Pruthvi Wedding",
         images: [
             {
-                url: "/images/og-image.png",
+                url: "/images/og-image.jpg",
                 width: 1200,
                 height: 630,
+                type: "image/jpeg",
                 alt: "Wedding Invitation | Pruthvi & Akruthi",
             }
         ],
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Wedding Invitation | Pruthvi & Akruthi",
         description: "We are joyfully inviting you to celebrate the wedding of Pruthvi and Akruthi. 12th March 2026.",
-        images: ["/images/og-image.png"],
+        images: ["/images/og-image.jpg"],
     },
     appleWebApp: {
         capable: true,
@@ -61,7 +63,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+        <html lang="en" prefix="og: http://ogp.me/ns#" className={`${inter.variable} ${cormorant.variable}`}>
             <body className="bg-[#3D2B52] text-charcoal antialiased">
                 {children}
             </body>
