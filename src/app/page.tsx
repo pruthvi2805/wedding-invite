@@ -109,7 +109,7 @@ export default function Home() {
                                 fill
                                 className="object-contain p-2"
                                 sizes="240px"
-                                loading="lazy"
+                                priority
                             />
                         }
                     />
@@ -124,12 +124,12 @@ export default function Home() {
                         accentColor="marigold"
                         icon={
                             <Image
-                                src="/images/reception-couple-clean.png"
+                                src="/images/reception-couple.jpg"
                                 alt="Reception"
                                 fill
                                 className="object-contain p-2"
                                 sizes="240px"
-                                loading="lazy"
+                                priority
                             />
                         }
                     />

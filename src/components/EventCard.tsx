@@ -41,7 +41,7 @@ export const EventCard = ({
     return (
         <div
             ref={elementRef}
-            className={`w-full flex flex-col items-center transition-transform duration-700 ease-out ${isInView ? "translate-y-0" : "translate-y-12"}`}
+            className={`w-full flex flex-col items-center transition-all duration-1000 ease-out ${isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}
         >
             <div className={`w-full max-w-[340px] rounded-[36px] border ${theme.border} bg-white px-6 pb-10 pt-12`}>
                 {/* Title Section - Now at Top */}
