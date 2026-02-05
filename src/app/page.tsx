@@ -167,18 +167,18 @@ export default function Home() {
 
                                 try {
                                     if (navigator.share) {
-                                        // Some platforms/apps (like WhatsApp on iOS) ignore 'text' if 'url' is present.
-                                        // Combining them in 'text' is the most reliable way to ensure the message is sent.
                                         await navigator.share({
                                             title: shareData.title,
                                             text: shareData.text
-                                            // Leaving 'url' out here so apps like WhatsApp prioritize the 'text' content
                                         });
                                     } else {
                                         window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text)}`, '_blank');
                                     }
                                 } catch (err) {
-                                    window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text)}`, '_blank');
+                                    // Only fallback to WhatsApp if it wasn't a user cancellation
+                                    if (err instanceof Error && err.name !== 'AbortError') {
+                                        window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text)}`, '_blank');
+                                    }
                                 }
                             }}
                             className="bg-[#FAF7F0] text-[#3D2B52] px-8 py-3.5 rounded-full font-serif font-medium flex items-center gap-3 border border-white/20 active:scale-95 transition-transform duration-200"
