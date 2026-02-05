@@ -5,6 +5,7 @@ import { Hero } from "@/components/Hero";
 import { EventCard } from "@/components/EventCard";
 import { Share2, Heart } from "lucide-react";
 import { useInViewOnce } from "@/components/useInViewOnce";
+import { Countdown } from "@/components/Countdown";
 import Image from "next/image";
 
 import { weddingDetails } from "@/config/wedding";
@@ -52,20 +53,20 @@ export default function Home() {
 
                         <div className="space-y-10">
                             <div className="space-y-2">
-                                <p className="text-2xl font-serif text-[#3D2B52] font-semibold leading-tight px-4">
-                                    {groom.parents}
+                                <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-sans font-bold">
+                                    Groom&apos;s Parents
                                 </p>
-                                <p className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-sans font-bold">
-                                    Groom&apos;s Family
+                                <p className="text-2xl font-serif text-[#3D2B52] leading-snug px-4 text-balance">
+                                    {groom.parents.replace(/Mrs\.\s/g, "Mrs.\u00A0")}
                                 </p>
                             </div>
 
                             <div className="space-y-2">
-                                <p className="text-2xl font-serif text-[#3D2B52] font-semibold leading-tight px-4">
-                                    {bride.parents}
+                                <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-sans font-bold">
+                                    Bride&apos;s Parents
                                 </p>
-                                <p className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-sans font-bold">
-                                    Bride&apos;s Family
+                                <p className="text-2xl font-serif text-[#3D2B52] leading-snug px-4 text-balance">
+                                    {bride.parents.replace(/Mrs\.\s/g, "Mrs.\u00A0")}
                                 </p>
                             </div>
                         </div>
@@ -133,6 +134,9 @@ export default function Home() {
                     />
                 </div>
             </div>
+
+            {/* Countdown Section */}
+            <Countdown targetDate="2026-03-12T10:55:00" />
 
             {/* Footer / RSVP / Share */}
             <footer className="relative bg-[#3D2B52] text-[#FFFDF5] pt-24 pb-28 px-6 text-center overflow-hidden">

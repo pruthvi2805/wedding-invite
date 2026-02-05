@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { PetalAnimation } from "./PetalAnimation";
+import { GoldDust } from "./GoldDust";
 
 interface HeroProps {
     groomName?: string;
@@ -60,8 +61,16 @@ export const Hero = ({
             <div className="absolute inset-0 z-0 bg-[#3D2B52] bg-noise animate-hero-bg opacity-100" />
 
             <PetalAnimation isStarted={startPetals} />
+            <GoldDust />
 
             <div className={`relative z-10 flex flex-col items-center text-center px-6 w-full justify-center transition-opacity duration-1000 ${startHero ? "opacity-100" : "opacity-0"}`}>
+                {/* Auspicious Invocation */}
+                <div className="mb-6 opacity-90 animate-fade-in delay-300">
+                    <p className="text-[#D4AF37] font-serif italic text-xl md:text-2xl tracking-wide">
+                        || Shree Ganeshay Namah ||
+                    </p>
+                </div>
+
                 <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-3 block font-sans">
                     We cordially invite you
                 </span>
@@ -71,7 +80,7 @@ export const Hero = ({
 
                 <div className="flex flex-col items-center gap-1 mb-5 mt-5 animate-hero-fade" style={{ animationDelay: "0.4s" }}>
                     <h1
-                        className="text-[4rem] leading-[0.85] font-serif font-bold text-white tracking-tighter"
+                        className="text-[4rem] leading-[0.85] font-serif font-bold text-gradient-gold tracking-tighter"
                     >
                         {groomName}
                     </h1>
@@ -83,7 +92,7 @@ export const Hero = ({
                     </div>
 
                     <h1
-                        className="text-[4rem] leading-[0.85] font-serif font-bold text-white tracking-tighter"
+                        className="text-[4rem] leading-[0.85] font-serif font-bold text-gradient-gold tracking-tighter"
                     >
                         {brideName}
                     </h1>
@@ -93,8 +102,7 @@ export const Hero = ({
 
                 <div className="pt-6 border-t border-white/5 w-full max-w-[220px] delay-700 duration-700 transition-opacity">
                     <p className="text-[10px] font-sans tracking-[0.3em] uppercase text-white/50 leading-relaxed">
-                        Thursday, 12 March 2026 <br />
-                        Jagtial, Telangana
+                        Thursday, 12 March 2026
                     </p>
                 </div>
             </div>

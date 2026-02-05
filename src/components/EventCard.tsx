@@ -46,9 +46,6 @@ export const EventCard = ({
             <div className={`w-full max-w-[340px] rounded-[36px] border ${theme.border} bg-white px-6 pb-10 pt-12`}>
                 {/* Title Section - Now at Top */}
                 <div className="text-center space-y-2 mb-8">
-                    <p className="text-[10px] uppercase tracking-[0.4em] text-[#4A235A]/50 font-sans font-semibold">
-                        Join us for
-                    </p>
                     <h2 className={`text-4xl font-serif ${theme.primary} leading-tight`}>
                         {title}
                     </h2>
@@ -74,7 +71,7 @@ export const EventCard = ({
 
                             {/* Time */}
                             <Clock className="text-gold mt-1" size={20} />
-                            <p className="text-sm font-sans uppercase tracking-[0.2em] text-charcoal/70 pt-1">{time}</p>
+                            <p className="text-sm font-sans tracking-[0.05em] text-charcoal/70 pt-1">{time}</p>
 
                             {/* Venue */}
                             <MapPin className="text-gold mt-1" size={20} />

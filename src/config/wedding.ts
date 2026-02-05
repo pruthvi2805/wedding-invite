@@ -15,7 +15,7 @@ export const weddingDetails = {
         wedding: {
             title: "The Wedding",
             date: "Thursday, 12th March 2026",
-            time: "11:00 AM onwards",
+            time: "10:55 AM",
             venue: "Virupakshi Gardens",
             address: "Jagtial, Telangana",
             coordinates: {
@@ -27,7 +27,7 @@ export const weddingDetails = {
         reception: {
             title: "The Reception",
             date: "Saturday, 14th March 2026",
-            time: "06:00 PM onwards",
+            time: "06:00 PM Onwards",
             venue: "Mangalamurthy Hotels",
             address: "Adilabad, Telangana",
             coordinates: {

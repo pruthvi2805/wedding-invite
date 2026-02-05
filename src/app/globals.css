@@ -76,6 +76,17 @@ section {
     .text-body-warm {
         @apply text-base font-sans font-light tracking-wide leading-relaxed;
     }
+
+    .text-gradient-gold {
+        background: linear-gradient(to right, #bf953f, #e3c472, #b38728, #e3c472, #aa771c);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        /* Fallback */
+        animation: shine 12s linear infinite;
+    }
 }
 
 /* Animations */
@@ -143,6 +154,34 @@ section {
     to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@keyframes float-dust {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(30px, -30px);
+        opacity: 0.4;
+    }
+
+    90% {
+        opacity: 0.8;
     }
 }
 
