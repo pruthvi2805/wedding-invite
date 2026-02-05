@@ -56,8 +56,10 @@ export const EventCard = ({
 
                 {/* Image Section - Middle */}
                 <div className="flex justify-center mb-8">
-                    <div className="relative h-56 w-56 overflow-hidden">
-                        <div className="absolute inset-0">{icon}</div>
+                    <div className="relative h-56 w-56 overflow-hidden rounded-full border-[6px] border-[#D4AF37]/20 shadow-sm">
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+                            {icon}
+                        </div>
                     </div>
                 </div>
 
@@ -65,21 +67,20 @@ export const EventCard = ({
                 <div className="text-center space-y-8">
                     <div className="space-y-6">
                         {/* Stacked Info Blocks */}
-                        <div className="flex items-center justify-center gap-4">
-                            <Calendar className="text-gold" size={18} />
+                        <div className="inline-grid grid-cols-[24px_1fr] gap-x-4 gap-y-6 text-left mx-auto max-w-fit items-start">
+                            {/* Date */}
+                            <Calendar className="text-gold mt-1" size={20} />
                             <p className="text-xl font-serif text-charcoal">{date}</p>
-                        </div>
 
-                        <div className="flex items-center justify-center gap-4">
-                            <Clock className="text-gold" size={18} />
-                            <p className="text-sm font-sans uppercase tracking-[0.2em] text-charcoal/70">{time}</p>
-                        </div>
+                            {/* Time */}
+                            <Clock className="text-gold mt-1" size={20} />
+                            <p className="text-sm font-sans uppercase tracking-[0.2em] text-charcoal/70 pt-1">{time}</p>
 
-                        <div className="flex items-center justify-center gap-4 items-start">
-                            <MapPin className="text-gold mt-1 shrink-0" size={18} />
+                            {/* Venue */}
+                            <MapPin className="text-gold mt-1" size={20} />
                             <div className="space-y-0.5">
                                 <p className="text-xl font-serif text-charcoal">{venueName}</p>
-                                <p className="text-sm font-sans text-charcoal/50 leading-relaxed px-4">{address}</p>
+                                <p className="text-sm font-sans text-charcoal/50 leading-relaxed">{address}</p>
                             </div>
                         </div>
                     </div>
